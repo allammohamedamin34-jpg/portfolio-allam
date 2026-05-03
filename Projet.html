@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projet — Allam Mohamed Amin</title>
+<template id="__bundler_thumbnail" data-bg-color="#F5F0E8">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="1200" height="800" fill="#F5F0E8"/>
+    <!-- Nav bar -->
+    <rect width="1200" height="60" fill="#EDE8DC"/>
+    <circle cx="80" cy="30" r="6" fill="#C4522A"/>
+    <rect x="100" y="24" width="120" height="12" rx="2" fill="#C4522A" opacity="0.7"/>
+    <!-- Project tabs -->
+    <rect width="1200" height="40" y="60" fill="#E4DDD0"/>
+    <rect x="0" y="60" width="200" height="40" fill="#EDE8DC"/>
+    <rect x="0" y="96" width="200" height="4" fill="#C4522A"/>
+    <!-- Hero title block -->
+    <rect x="60" y="130" width="280" height="10" rx="2" fill="#C4522A" opacity="0.5"/>
+    <rect x="60" y="155" width="520" height="36" rx="3" fill="#1C1C1A" opacity="0.85"/>
+    <rect x="60" y="200" width="380" height="20" rx="3" fill="#1C1C1A" opacity="0.5"/>
+    <rect x="60" y="230" width="300" height="14" rx="2" fill="#4A4845" opacity="0.4"/>
+    <!-- Tags -->
+    <rect x="60" y="260" width="70" height="20" rx="2" fill="#C4522A" opacity="0.15"/>
+    <rect x="140" y="260" width="60" height="20" rx="2" fill="#C4522A" opacity="0.15"/>
+    <rect x="210" y="260" width="55" height="20" rx="2" fill="#2D6B52" opacity="0.15"/>
+    <!-- Section nav -->
+    <rect x="0" y="300" width="1200" height="44" fill="#fff" opacity="0.9"/>
+    <rect x="60" y="300" width="80" height="44" fill="none"/>
+    <rect x="60" y="340" width="80" height="4" fill="#1C1C1A"/>
+    <!-- Problem cards -->
+    <rect x="60" y="380" width="240" height="120" rx="6" fill="#fff" stroke="#C4522A" stroke-width="3"/>
+    <rect x="320" y="380" width="240" height="120" rx="6" fill="#fff" stroke="#C4522A" stroke-width="3"/>
+    <rect x="580" y="380" width="240" height="120" rx="6" fill="#fff" stroke="#C4522A" stroke-width="3"/>
+    <rect x="840" y="380" width="240" height="120" rx="6" fill="#fff" stroke="#C4522A" stroke-width="3"/>
+    <!-- Steps -->
+    <circle cx="80" cy="540" r="16" fill="#C4522A"/>
+    <rect x="108" y="533" width="300" height="14" rx="2" fill="#1C1C1A" opacity="0.7"/>
+    <rect x="108" y="555" width="220" height="10" rx="2" fill="#4A4845" opacity="0.4"/>
+    <circle cx="80" cy="610" r="16" fill="#C4522A" opacity="0.6"/>
+    <rect x="108" y="603" width="260" height="14" rx="2" fill="#1C1C1A" opacity="0.5"/>
+    <rect x="108" y="625" width="180" height="10" rx="2" fill="#4A4845" opacity="0.3"/>
+  </svg>
+</template>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #F5F0E8;
+    --bg2:     #EDE8DC;
+    --bg3:     #E4DDD0;
+    --fg:      #1C1C1A;
+    --fg2:     #4A4845;
+    --fg3:     #8C877E;
+    --accent:  #C4522A;
+    --accent2: #2D6B52;
+    --border:  rgba(28,28,26,0.10);
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --display: 'Syne', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.6; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 3rem;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: var(--mono); font-size: 0.85rem; color: var(--accent); text-decoration: none; letter-spacing: 0.06em; }
+  .nav-back {
+    font-family: var(--mono); font-size: 0.75rem; color: var(--fg2);
+    text-decoration: none; display: flex; align-items: center; gap: 0.4rem;
+    letter-spacing: 0.06em; transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--accent); }
+
+  /* PROJECT SELECTOR TABS */
+  .project-tabs {
+    position: fixed; top: 57px; left: 0; right: 0; z-index: 99;
+    display: flex; background: rgba(237,232,220,0.97); border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px); overflow-x: auto;
+  }
+  .project-tab {
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.75rem 1.5rem; cursor: pointer; border: none; background: none;
+    color: var(--fg3); white-space: nowrap; border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .project-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .project-tab:hover { color: var(--fg); }
+
+  /* MAIN CONTENT */
+  main { padding-top: 105px; }
+
+  /* HERO BANNER */
+  .project-hero {
+    padding: 4rem 3rem 3rem;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: none;
+  }
+  .project-hero.active { display: block; }
+  .project-hero-inner { max-width: 900px; margin: 0 auto; }
+  .hero-eyebrow {
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent); display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;
+  }
+  .hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
+  .project-hero h1 {
+    font-family: var(--display); font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.25rem;
+  }
+  .project-hero h1 em { font-style: italic; color: var(--accent); }
+  .project-hero-desc {
+    font-size: 1.05rem; color: var(--fg2); max-width: 60ch; line-height: 1.75;
+  }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .htag {
+    font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.25rem 0.7rem; border-radius: 2px;
+    background: rgba(196,82,42,0.08); color: var(--accent);
+    border: 1px solid rgba(196,82,42,0.2);
+  }
+  .htag.green {
+    background: rgba(45,107,82,0.08); color: var(--accent2);
+    border-color: rgba(45,107,82,0.2);
+  }
+
+  /* SECTIONS NAV */
+  .sections-nav {
+    display: none; align-items: center; gap: 0;
+    border-bottom: 1px solid var(--border);
+    background: #fff; padding: 0 3rem;
+  }
+  .sections-nav.active { display: flex; }
+  .sec-tab {
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.85rem 1.25rem; cursor: pointer; border: none; background: none;
+    color: var(--fg3); border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s;
+  }
+  .sec-tab.active { color: var(--fg); border-bottom-color: var(--fg); }
+  .sec-tab:hover { color: var(--fg); }
+
+  /* SECTION CONTENT */
+  .project-section { display: none; padding: 3.5rem 3rem; max-width: 960px; margin: 0 auto; }
+  .project-section.active { display: block; }
+
+  /* Section titles */
+  .sec-label {
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent); display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;
+  }
+  .sec-label::after { content: ''; width: 40px; height: 1px; background: var(--accent); opacity: 0.4; }
+  .sec-title {
+    font-family: var(--display); font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700; letter-spacing: -0.02em; margin-bottom: 2rem; line-height: 1.15;
+  }
+
+  /* Text blocks */
+  .text-block { font-size: 1rem; color: var(--fg2); line-height: 1.8; }
+  .text-block p + p { margin-top: 1rem; }
+  .text-block strong { color: var(--fg); font-weight: 500; }
+
+  /* Problem cards */
+  .problem-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem; margin-top: 2rem; }
+  .problem-card {
+    background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem;
+    border-left: 3px solid var(--accent);
+  }
+  .problem-card-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .problem-card-title { font-family: var(--display); font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .problem-card-text { font-size: 0.88rem; color: var(--fg2); line-height: 1.6; }
+
+  /* Solution steps */
+  .steps { display: flex; flex-direction: column; gap: 0; margin-top: 2rem; }
+  .step {
+    display: grid; grid-template-columns: 48px 1fr; gap: 0 1.5rem;
+    padding-bottom: 2.5rem; position: relative;
+  }
+  .step:last-child { padding-bottom: 0; }
+  .step-num {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 0.8rem; font-weight: 500; flex-shrink: 0;
+    position: relative; z-index: 1;
+  }
+  .step::before {
+    content: ''; position: absolute; left: 19px; top: 40px; bottom: 0;
+    width: 2px; background: var(--border);
+  }
+  .step:last-child::before { display: none; }
+  .step-content { padding-top: 0.5rem; }
+  .step-title { font-family: var(--display); font-size: 1rem; font-weight: 600; margin-bottom: 0.35rem; }
+  .step-text { font-size: 0.92rem; color: var(--fg2); line-height: 1.7; }
+
+  /* Code block */
+  .code-block {
+    background: #1C2B2A; border-radius: 8px; overflow: hidden;
+    margin-top: 1.5rem; font-family: var(--mono); font-size: 0.8rem;
+  }
+  .code-header {
+    background: rgba(255,255,255,0.06); padding: 0.6rem 1rem;
+    display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .code-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .code-filename { color: #9ab5af; font-size: 0.72rem; margin-left: 0.5rem; }
+  .code-body { padding: 1.25rem 1.5rem; overflow-x: auto; color: #d4e6e1; line-height: 1.7; }
+  .code-body .c { color: #6a9e8f; }
+  .code-body .k { color: #c4a882; }
+  .code-body .s { color: #a5c7a0; }
+  .code-body .f { color: #81b8d4; }
+
+  /* Stack grid */
+  .stack-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; margin-top: 2rem; }
+  .stack-card {
+    background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem;
+    text-align: center; transition: border-color 0.2s, transform 0.2s;
+  }
+  .stack-card:hover { border-color: var(--accent2); transform: translateY(-2px); }
+  .stack-card-icon { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+  .stack-card-name { font-family: var(--display); font-size: 0.9rem; font-weight: 600; }
+  .stack-card-role { font-family: var(--mono); font-size: 0.65rem; color: var(--fg3); margin-top: 0.2rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* Results metrics */
+  .metrics { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.25rem; margin-top: 2rem; }
+  .metric-card {
+    background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem;
+    text-align: center;
+  }
+  .metric-value {
+    font-family: var(--display); font-size: 2.5rem; font-weight: 800;
+    line-height: 1; color: var(--accent);
+  }
+  .metric-value.green { color: var(--accent2); }
+  .metric-label { font-family: var(--mono); font-size: 0.68rem; color: var(--fg3); margin-top: 0.4rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  .metric-sub { font-size: 0.82rem; color: var(--fg2); margin-top: 0.5rem; }
+
+  /* Conclusion block */
+  .conclusion {
+    margin-top: 2.5rem; padding: 1.75rem 2rem;
+    background: rgba(45,107,82,0.06); border: 1px solid rgba(45,107,82,0.15);
+    border-radius: 8px; border-left: 3px solid var(--accent2);
+  }
+  .conclusion-title { font-family: var(--display); font-size: 0.95rem; font-weight: 600; color: var(--accent2); margin-bottom: 0.5rem; }
+  .conclusion-text { font-size: 0.92rem; color: var(--fg2); line-height: 1.7; }
+
+  /* Schema / diagram mockup */
+  .schema {
+    margin-top: 2rem; background: #fff; border: 1px solid var(--border);
+    border-radius: 8px; padding: 2rem; display: flex; align-items: center;
+    justify-content: center; gap: 0; overflow-x: auto;
+  }
+  .schema-step {
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    min-width: 100px;
+  }
+  .schema-box {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 6px;
+    padding: 0.6rem 1rem; text-align: center;
+    font-family: var(--mono); font-size: 0.72rem; color: var(--fg2);
+    white-space: nowrap;
+  }
+  .schema-box.accent { background: rgba(196,82,42,0.08); border-color: rgba(196,82,42,0.25); color: var(--accent); font-weight: 500; }
+  .schema-box.green { background: rgba(45,107,82,0.08); border-color: rgba(45,107,82,0.25); color: var(--accent2); font-weight: 500; }
+  .schema-label { font-family: var(--mono); font-size: 0.62rem; color: var(--fg3); text-transform: uppercase; letter-spacing: 0.08em; }
+  .schema-arrow { font-size: 1.2rem; color: var(--fg3); padding: 0 0.5rem; align-self: center; margin-bottom: 1.2rem; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav, .project-tabs, .sections-nav { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .project-hero, .project-section { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .sections-nav { padding-left: 0; padding-right: 0; }
+    .sec-tab { padding: 0.75rem 0.85rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">AMA portfolio</a>
+  <a href="index.html#projects" class="nav-back">← Retour aux projets</a>
+</nav>
+
+<!-- PROJECT TABS -->
+<div class="project-tabs" id="projectTabs">
+  <button class="project-tab active" onclick="showProject(0)">01 — Reporting automatisé</button>
+  <button class="project-tab" onclick="showProject(1)">02 — Canevas multi-services</button>
+  <button class="project-tab" onclick="showProject(2)">03 — Dashboard clinique</button>
+  <button class="project-tab" onclick="showProject(3)">04 — Étude comparative</button>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════════
+     PROJET 0 — Reporting automatisé
+═══════════════════════════════════════════ -->
+<div class="project-hero active" data-project="0">
+  <div class="project-hero-inner">
+    <div class="hero-eyebrow">Projet 01 · 2024 · Ouezzane</div>
+    <h1>Reporting hospitalier<br><em>mensuel automatisé</em></h1>
+    <p class="project-hero-desc">
+      Script Python générant automatiquement un rapport LaTeX d'activité mensuelle à partir de données brutes hospitalières — élimination totale de la saisie manuelle.
+    </p>
+    <div class="hero-tags">
+      <span class="htag">Python</span>
+      <span class="htag">pandas</span>
+      <span class="htag">LaTeX</span>
+      <span class="htag">Automatisation</span>
+      <span class="htag green">SIGS</span>
+      <span class="htag green">Reporting</span>
+    </div>
+  </div>
+</div>
+
+<div class="sections-nav active" data-project="0">
+  <button class="sec-tab active" onclick="showSection(0,0)">Le défi</button>
+  <button class="sec-tab" onclick="showSection(0,1)">La solution</button>
+  <button class="sec-tab" onclick="showSection(0,2)">Stack</button>
+  <button class="sec-tab" onclick="showSection(0,3)">Résultats</button>
+</div>
+
+<!-- Défi -->
+<div class="project-section active" data-project="0" data-section="0">
+  <div class="sec-label">Le défi</div>
+  <h2 class="sec-title">Un processus manuel, chronophage et source d'erreurs</h2>
+  <div class="text-block">
+    <p>
+      Chaque mois au CHP Ouezzane, la production du rapport d'activité hospitalière destiné à la direction et aux services techniques du Ministère représentait <strong>plusieurs jours de travail manuel</strong> : collecte des données brutes, agrégation sous Excel, mise en forme dans un traitement de texte, relecture et envoi.
+    </p>
+    <p>
+      Ce processus était non seulement <strong>long et répétitif</strong>, mais aussi sujet à des erreurs de saisie, des incohérences entre versions, et une mise en forme irrégulière selon le mois.
+    </p>
+  </div>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-card-icon">⏱</div>
+      <div class="problem-card-title">Temps de production excessif</div>
+      <div class="problem-card-text">Plusieurs jours par mois consacrés à la mise en forme des rapports plutôt qu'à l'analyse.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-icon">⚠️</div>
+      <div class="problem-card-title">Risque d'erreurs humaines</div>
+      <div class="problem-card-text">Copier-coller entre fichiers Excel et Word introduisant des erreurs difficiles à détecter.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-icon">📄</div>
+      <div class="problem-card-title">Incohérence de format</div>
+      <div class="problem-card-text">Chaque rapport avait un aspect légèrement différent selon la personne qui le produisait.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-icon">🔄</div>
+      <div class="problem-card-title">Non reproductible</div>
+      <div class="problem-card-text">Impossible de régénérer un rapport passé rapidement en cas de demande de la direction.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Solution -->
+<div class="project-section" data-project="0" data-section="1">
+  <div class="sec-label">La solution</div>
+  <h2 class="sec-title">Un pipeline Python → LaTeX entièrement automatisé</h2>
+  <div class="text-block">
+    <p>
+      Développement d'un script Python utilisant <strong>pandas</strong> pour ingérer les données brutes hospitalières (CSV/Excel), les nettoyer, calculer les indicateurs (DMS, TOM, IR, TR, flux patients), puis injecter les valeurs dans un <strong>template LaTeX</strong> pour générer un PDF professionnel.
+    </p>
+  </div>
+  <div class="schema">
+    <div class="schema-step">
+      <div class="schema-box accent">Données brutes<br>CSV / Excel</div>
+      <div class="schema-label">Input</div>
+    </div>
+    <div class="schema-arrow">→</div>
+    <div class="schema-step">
+      <div class="schema-box">pandas<br>nettoyage + calculs</div>
+      <div class="schema-label">Traitement</div>
+    </div>
+    <div class="schema-arrow">→</div>
+    <div class="schema-step">
+      <div class="schema-box">Template<br>LaTeX</div>
+      <div class="schema-label">Mise en forme</div>
+    </div>
+    <div class="schema-arrow">→</div>
+    <div class="schema-step">
+      <div class="schema-box green">Rapport PDF<br>professionnel</div>
+      <div class="schema-label">Output</div>
+    </div>
+  </div>
+  <div class="steps" style="margin-top:2.5rem">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Ingestion des données brutes</div>
+        <div class="step-text">Lecture automatique des fichiers de saisie mensuelle (CSV ou Excel) exportés du SIGS. Détection et gestion des valeurs manquantes ou aberrantes.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Calcul des indicateurs hospitaliers</div>
+        <div class="step-text">Calcul automatique de la DMS (Durée Moyenne de Séjour), TOM (Taux d'Occupation des Lits), IR (Indice de Rotation), TR (Taux de Rotation) et flux patients par service.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Injection dans le template LaTeX</div>
+        <div class="step-text">Les valeurs calculées sont injectées dans un template LaTeX paramétré via Jinja2. Génération des tableaux, graphiques et sections narratives automatiquement.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Compilation et livraison PDF</div>
+        <div class="step-text">Compilation pdflatex automatique. Le rapport final est un PDF signé, paginé, prêt pour la direction en quelques secondes.</div>
+      </div>
+    </div>
+  </div>
+  <div class="code-block">
+    <div class="code-header">
+      <div class="code-dot" style="background:#ff5f57"></div>
+      <div class="code-dot" style="background:#ffbd2e"></div>
+      <div class="code-dot" style="background:#28ca41"></div>
+      <span class="code-filename">rapport_mensuel.py</span>
+    </div>
+    <div class="code-body"><pre><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> jinja2, subprocess, pathlib
+
+<span class="c"># 1. Charger les données brutes</span>
+df = pd.<span class="f">read_excel</span>(<span class="s">"saisie_avril_2026.xlsx"</span>)
+
+<span class="c"># 2. Calculer les indicateurs</span>
+stats = {
+    <span class="s">"dms"</span>:  (df[<span class="s">"journees_hosp"</span>] / df[<span class="s">"sorties"</span>]).<span class="f">mean</span>(),
+    <span class="s">"tom"</span>:  df[<span class="s">"journees_hosp"</span>].<span class="f">sum</span>() / (df[<span class="s">"lits"</span>].<span class="f">sum</span>() * <span class="s">30</span>),
+    <span class="s">"mois"</span>: <span class="s">"Avril 2026"</span>,
+}
+
+<span class="c"># 3. Injecter dans le template LaTeX</span>
+tmpl = jinja2.Environment().<span class="f">from_string</span>(
+    pathlib.Path(<span class="s">"template.tex"</span>).<span class="f">read_text</span>())
+pathlib.Path(<span class="s">"rapport.tex"</span>).<span class="f">write_text</span>(tmpl.<span class="f">render</span>(**stats))
+
+<span class="c"># 4. Compiler en PDF</span>
+subprocess.<span class="f">run</span>([<span class="s">"pdflatex"</span>, <span class="s">"rapport.tex"</span>])</pre></div>
+  </div>
+</div>
+
+<!-- Stack -->
+<div class="project-section" data-project="0" data-section="2">
+  <div class="sec-label">Stack</div>
+  <h2 class="sec-title">Technologies utilisées</h2>
+  <div class="stack-grid">
+    <div class="stack-card">
+      <span class="stack-card-icon">🐍</span>
+      <div class="stack-card-name">Python 3</div>
+      <div class="stack-card-role">Langage principal</div>
+    </div>
+    <div class="stack-card">
+      <span class="stack-card-icon">🐼</span>
+      <div class="stack-card-name">pandas</div>
+      <div class="stack-card-role">Traitement données</div>
+    </div>
+    <div class="stack-card">
+      <span class="stack-card-icon">📝</span>
+      <div class="stack-card-name">Jinja2</div>
+      <div class="stack-card-role">Templating</div>
+    </div>
+    <div class="stack-card">
+      <span class="stack-card-icon">📄</span>
+      <div class="stack-card-name">LaTeX / pdflatex</div>
+      <div class="stack-card-role">Génération PDF</div>
+    </div>
+    <div class="stack-card">
+      <span class="stack-card-icon">📊</span>
+      <div class="stack-card-name">openpyxl</div>
+      <div class="stack-card-role">Lecture Excel</div>
+    </div>
+    <div class="stack-card">
+      <span class="stack-card-icon">🏥</span>
+      <div class="stack-card-name">SIGS / RIH</div>
+      <div class="stack-card-role">Source données</div>
+    </div>
+  </div>
+</div>
+
+<!-- Résultats -->
+<div class="project-section" data-project="0" data-section="3">
+  <div class="sec-label">Résultats</div>
+  <h2 class="sec-title">Impact concret sur la production des rapports</h2>
+  <div class="metrics">
+    <div class="metric-card">
+      <div class="metric-value">~0</div>
+      <div class="metric-label">Saisie manuelle</div>
+      <div class="metric-sub">Élimination totale des copier-coller</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value green">< 30s</div>
+      <div class="metric-label">Génération rapport</div>
+      <div class="metric-sub">Contre plusieurs jours auparavant</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">100%</div>
+      <div class="metric-label">Cohérence format</div>
+      <div class="metric-sub">Même mise en page chaque mois</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value green">∞</div>
+      <div class="metric-label">Reproductibilité</div>
+      <div class="metric-sub">N'importe quel mois, en 30 secondes</div>
+    </div>
+  </div>
+  <div class="conclusion">
+    <div class="conclusion-title">Impact opérationnel</div>
+    <div class="conclusion-text">
+      Le temps libéré par l'automatisation est désormais consacré à l'<strong>analyse</strong> et à l'<strong>interprétation</strong> des données plutôt qu'à leur mise en forme. Ce projet démontre comment une compétence en programmation peut transformer directement la productivité d'un service de statistiques hospitalières.
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PROJET 1 — Canevas multi-services
+═══════════════════════════════════════════ -->
+<div class="project-hero" data-project="1">
+  <div class="project-hero-inner">
+    <div class="hero-eyebrow">Projet 02 · 2024 · Ouezzane</div>
+    <h1>Canevas de collecte<br><em>multi-services</em></h1>
+    <p class="project-hero-desc">
+      Conception de templates standardisés de collecte de données pour quatre services prioritaires — livrés en formats Markdown et Excel, alignés sur les nomenclatures RIH/SIGS.
+    </p>
+    <div class="hero-tags">
+      <span class="htag">Excel</span>
+      <span class="htag">Markdown</span>
+      <span class="htag green">SIGS</span>
+      <span class="htag green">RIH</span>
+      <span class="htag">Qualité données</span>
+    </div>
+  </div>
+</div>
+
+<div class="sections-nav" data-project="1">
+  <button class="sec-tab active" onclick="showSection(1,0)">Le défi</button>
+  <button class="sec-tab" onclick="showSection(1,1)">La solution</button>
+  <button class="sec-tab" onclick="showSection(1,2)">Stack</button>
+  <button class="sec-tab" onclick="showSection(1,3)">Résultats</button>
+</div>
+
+<div class="project-section active" data-project="1" data-section="0">
+  <div class="sec-label">Le défi</div>
+  <h2 class="sec-title">Des données hétérogènes et non standardisées entre services</h2>
+  <div class="text-block">
+    <p>
+      Les quatre services prioritaires du CHP (Urgence, Maternité, Hospitalisation, Pharmacie) utilisaient chacun leurs propres formats de saisie, souvent incompatibles avec les nomenclatures officielles du <strong>Répertoire des Informations Hospitalières (RIH)</strong> et du SIGS.
+    </p>
+    <p>
+      Cette hétérogénéité rendait toute <strong>consolidation ou comparaison inter-services impossible</strong>, et obligeait à un travail de recodage systématique avant toute analyse.
+    </p>
+  </div>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-card-icon">🗂</div>
+      <div class="problem-card-title">Formats disparates</div>
+      <div class="problem-card-text">Chaque service avait son propre cahier ou tableau Excel sans structure commune.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-icon">❌</div>
+      <div class="problem-card-title">Non-conformité RIH</div>
+      <div class="problem-card-text">Les variables collectées ne correspondaient pas aux nomenclatures officielles du Ministère.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-icon">🔀</div>
+      <div class="problem-card-title">Recodage systématique</div>
+      <div class="problem-card-text">Chaque agrégation nécessitait un travail de mapping manuel, source d'erreurs.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-icon">📉</div>
+      <div class="problem-card-title">Perte de données</div>
+      <div class="problem-card-text">Certaines variables clés n'étaient pas collectées du tout dans certains services.</div>
+    </div>
+  </div>
+</div>
+
+<div class="project-section" data-project="1" data-section="1">
+  <div class="sec-label">La solution</div>
+  <h2 class="sec-title">Templates standardisés, alignés RIH/SIGS, livrés en 2 formats</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Audit des pratiques existantes</div>
+        <div class="step-text">Recensement des variables collectées dans chaque service, identification des écarts avec les nomenclatures RIH et SIGS. Entretiens avec les agents de chaque service.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Conception du modèle de données commun</div>
+        <div class="step-text">Définition d'un dictionnaire de variables partagé : noms, types, unités, valeurs autorisées — conforme aux nomenclatures officielles. Intégration des spécificités de chaque service.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Création des templates Excel</div>
+        <div class="step-text">4 fichiers Excel structurés avec validation des données (listes déroulantes, plages de valeurs), protection des en-têtes, et onglets de guide d'utilisation.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Documentation Markdown</div>
+        <div class="step-text">Chaque template accompagné d'un fichier Markdown documentant chaque variable : définition, mode de calcul, source, et exemples.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="project-section" data-project="1" data-section="2">
+  <div class="sec-label">Stack</div>
+  <h2 class="sec-title">Outils et méthodes</h2>
+  <div class="stack-grid">
+    <div class="stack-card">
+      <span class="stack-card-icon">📊</span>
+      <div class="stack-card-name">Microsoft Excel</div>
+      <div class="stack-card-role">Templates de saisie</div>
+    </div>
+    <div class="stack-card">
+      <span class="stack-card-icon">📝</span>
+      <div class="stack-card-name">Markdown</div>
+      <div class="stack-card-role">Documentation</div>
+    </div>
+    <div class="stack-card">
+      <span class="stack-card-icon">🏥</span>
+      <div class="stack-card-name">Nomenclature RIH</div>
+      <div class="stack-card-role">Référentiel</div>
+    </div>
+    <div class="stack-card">
+      <span class="stack-card-icon">🗄</div>
+      <div class="stack-card-name">SIGS</div>
+      <div class="stack-card-role">Système cible</div>
+    </div>
+  </div>
+</div>
+
+<div class="project-section" data-project="1" data-section="3">
+  <div class="sec-label">Résultats</div>
+  <h2 class="sec-title">Standardisation réussie sur 4 services</h2>
+  <div class="metrics">
+    <div class="metric-card">
+      <div class="metric-value">4</div>
+      <div class="metric-label">Services couverts</div>
+      <div class="metric-sub">Urgence · Maternité · Hospit. · Pharmacie</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value green">100%</div>
+      <div class="metric-label">Conformité RIH</div>
+      <div class="metric-sub">Variables alignées sur la nomenclature nationale</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">2</div>
+      <div class="metric-label">Formats livrés</div>
+      <div class="metric-sub">Excel (saisie) + Markdown (documentation)</div>
+    </div>
+  </div>
+  <div class="conclusion">
+    <div class="conclusion-title">Impact sur la qualité des données</div>
+    <div class="conclusion-text">
+      Ces canevas ont rendu possible la <strong>consolidation directe</strong> des données des 4 services sans recodage, réduisant drastiquement le temps de préparation des données avant analyse et améliorant leur fiabilité.
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PROJET 2 — Dashboard clinique
+═══════════════════════════════════════════ -->
+<div class="project-hero" data-project="2">
+  <div class="project-hero-inner">
+    <div class="hero-eyebrow">Projet 03 · 2025 · Conseil indépendant</div>
+    <h1>Dashboard interactif<br><em>Clinique privée</em></h1>
+    <p class="project-hero-desc">
+      Tableau de bord Power BI sur données synthétiques d'une clinique fictive de 60 lits / 4 blocs : taux d'occupation, flux patients, comparatifs N vs N-1, rentabilité par service.
+    </p>
+    <div class="hero-tags">
+      <span class="htag">Power BI</span>
+      <span class="htag">DAX</span>
+      <span class="htag">Visualisation</span>
+      <span class="htag green">KPI</span>
+      <span class="htag green">Conseil</span>
+    </div>
+  </div>
+</div>
+
+<div class="sections-nav" data-project="2">
+  <button class="sec-tab active" onclick="showSection(2,0)">Le défi</button>
+  <button class="sec-tab" onclick="showSection(2,1)">La solution</button>
+  <button class="sec-tab" onclick="showSection(2,2)">Stack</button>
+  <button class="sec-tab" onclick="showSection(2,3)">Résultats</button>
+</div>
+
+<div class="project-section active" data-project="2" data-section="0">
+  <div class="sec-label">Le défi</div>
+  <h2 class="sec-title">Les cliniques privées pilotent encore à l'aveugle</h2>
+  <div class="text-block">
+    <p>
+      La majorité des cliniques privées au Maroc n'ont pas accès à des outils de <strong>pilotage analytique en temps réel</strong>. Les directeurs prennent des décisions sur la base de rapports mensuels en PDF, souvent préparés trop tard pour réagir rapidement.
+    </p>
+    <p>
+      L'objectif de ce projet était de créer un <strong>démonstrateur convaincant</strong> pouvant être présenté à des cliniques clientes pour illustrer la valeur d'un dashboard de gestion hospitalière.
+    </p>
+  </div>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-card-icon">🔭</div>
+      <div class="problem-card-title">Pilotage à l'aveugle</div>
+      <div class="problem-card-text">Pas de vision temps réel de l'occupation, des flux ou de la rentabilité par service.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-icon">📅</div>
+      <div class="problem-card-title">Rapports trop tardifs</div>
+      <div class="problem-card-text">Les rapports PDF arrivent semaines après la période, trop tard pour corriger.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-icon">🏗</div>
+      <div class="problem-card-title">Pas de comparaison N/N-1</div>
+      <div class="problem-card-text">Impossible de mesurer la progression ou la régression entre deux périodes.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-icon">💰</div>
+      <div class="problem-card-title">Rentabilité opaque</div>
+      <div class="problem-card-text">Aucune vue consolidée de la rentabilité par service ou par bloc opératoire.</div>
+    </div>
+  </div>
+</div>
+
+<div class="project-section" data-project="2" data-section="1">
+  <div class="sec-label">La solution</div>
+  <h2 class="sec-title">Un dashboard Power BI couvrant 4 axes de pilotage</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Génération des données synthétiques</div>
+        <div class="step-text">Création d'un jeu de données réaliste pour une clinique fictive de 60 lits et 4 blocs opératoires, sur 24 mois glissants. Simulation des variations saisonnières et des tendances de croissance.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Modèle de données en étoile</div>
+        <div class="step-text">Conception d'un schéma en étoile avec tables de faits (séjours, actes) et dimensions (temps, service, praticien, type d'acte). Calcul des mesures DAX pour les KPI.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">4 pages de tableau de bord</div>
+        <div class="step-text">Vue d'ensemble · Occupation & flux · Comparatif N vs N-1 · Rentabilité par service. Navigation fluide avec filtres croisés et drill-through.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Démonstration client</div>
+        <div class="step-text">Dashboard packagé pour des présentations live avec mode présentation, narration guidée et export PDF/PowerPoint pour les directions.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="project-section" data-project="2" data-section="2">
+  <div class="sec-label">Stack</div>
+  <h2 class="sec-title">Technologies utilisées</h2>
+  <div class="stack-grid">
+    <div class="stack-card">
+      <span class="stack-card-icon">📊</span>
+      <div class="stack-card-name">Power BI</div>
+      <div class="stack-card-role">Visualisation</div>
+    </div>
+    <div class="stack-card">
+      <span class="stack-card-icon">🧮</span>
+      <div class="stack-card-name">DAX</div>
+      <div class="stack-card-role">Calculs & mesures</div>
+    </div>
+    <div class="stack-card">
+      <span class="stack-card-icon">🐍</span>
+      <div class="stack-card-name">Python</div>
+      <div class="stack-card-role">Génération données</div>
+    </div>
+    <div class="stack-card">
+      <span class="stack-card-icon">📋</span>
+      <div class="stack-card-name">Excel</div>
+      <div class="stack-card-role">Source données</div>
+    </div>
+    <div class="stack-card">
+      <span class="stack-card-icon">🏥</span>
+      <div class="stack-card-name">Indicateurs KPI</div>
+      <div class="stack-card-role">DMS · TOM · IR · TR</div>
+    </div>
+  </div>
+</div>
+
+<div class="project-section" data-project="2" data-section="3">
+  <div class="sec-label">Résultats</div>
+  <h2 class="sec-title">Un outil de démonstration prêt pour les clients</h2>
+  <div class="metrics">
+    <div class="metric-card">
+      <div class="metric-value">4</div>
+      <div class="metric-label">Pages dashboard</div>
+      <div class="metric-sub">Vue globale · Occupation · Comparatif · Rentabilité</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value green">60</div>
+      <div class="metric-label">Lits simulés</div>
+      <div class="metric-sub">4 blocs opératoires · données 24 mois</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">N/N-1</div>
+      <div class="metric-label">Comparatif</div>
+      <div class="metric-sub">Analyse de tendance automatique</div>
+    </div>
+  </div>
+  <div class="conclusion">
+    <div class="conclusion-title">Valeur commerciale</div>
+    <div class="conclusion-text">
+      Ce dashboard sert de support de vente pour l'activité de conseil indépendant, permettant de démontrer concrètement la <strong>valeur d'une analyse data</strong> appliquée à une clinique privée marocaine et d'ouvrir des conversations commerciales avec des directions médicales.
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PROJET 3 — Étude comparative
+═══════════════════════════════════════════ -->
+<div class="project-hero" data-project="3">
+  <div class="project-hero-inner">
+    <div class="hero-eyebrow">Projet 04 · 2024 · Ouezzane</div>
+    <h1>Étude comparative<br><em>annuelle d'activité</em></h1>
+    <p class="project-hero-desc">
+      Rapport analytique de 15-20 pages : analyse de la performance par service, détection des leviers de croissance, recommandations opérationnelles — au format publication.
+    </p>
+    <div class="hero-tags">
+      <span class="htag">LaTeX</span>
+      <span class="htag">R / RStudio</span>
+      <span class="htag">Analyse stat.</span>
+      <span class="htag green">Épidémiologie</span>
+      <span class="htag green">Reporting</span>
+    </div>
+  </div>
+</div>
+
+<div class="sections-nav" data-project="3">
+  <button class="sec-tab active" onclick="showSection(3,0)">Le défi</button>
+  <button class="sec-tab" onclick="showSection(3,1)">La solution</button>
+  <button class="sec-tab" onclick="showSection(3,2)">Stack</button>
+  <button class="sec-tab" onclick="showSection(3,3)">Résultats</button>
+</div>
+
+<div class="project-section active" data-project="3" data-section="0">
+  <div class="sec-label">Le défi</div>
+  <h2 class="sec-title">Transformer les données annuelles en décisions opérationnelles</h2>
+  <div class="text-block">
+    <p>
+      Chaque année, le CHP Ouezzane accumule des données d'activité sur l'ensemble de ses services. Ces données restent souvent à l'état brut ou sont présentées sous forme de tableaux sans <strong>analyse comparative, ni recommandations</strong> pour la direction.
+    </p>
+    <p>
+      L'objectif était de produire un rapport annuel de qualité publication, capable d'identifier les <strong>services en difficulté</strong>, les <strong>leviers d'amélioration</strong>, et de formuler des recommandations concrètes et argumentées.
+    </p>
+  </div>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-card-icon">📦</div>
+      <div class="problem-card-title">Données non analysées</div>
+      <div class="problem-card-text">Les statistiques annuelles sont collectées mais rarement exploitées analytiquement.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-icon">🔍</div>
+      <div class="problem-card-title">Signaux faibles invisibles</div>
+      <div class="problem-card-text">Des tendances importantes (baisse d'occupation, saturation) passent inaperçues faute d'analyse.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-icon">🗣</div>
+      <div class="problem-card-title">Manque de recommandations</div>
+      <div class="problem-card-text">Les rapports existants décrivent sans prescrire, laissant la direction sans guidance.</div>
+    </div>
+  </div>
+</div>
+
+<div class="project-section" data-project="3" data-section="1">
+  <div class="sec-label">La solution</div>
+  <h2 class="sec-title">Un rapport analytique structuré en 5 parties</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Collecte et consolidation des données annuelles</div>
+        <div class="step-text">Agrégation des données mensuelles de tous les services sur l'année N. Nettoyage et vérification de cohérence avec les rapports SIGS transmis.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Analyse statistique comparative N vs N-1</div>
+        <div class="step-text">Calcul des évolutions, tests statistiques de significativité, analyse des distributions. Identification des services sur/sous-performants par rapport à N-1 et aux benchmarks régionaux.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Visualisations et graphiques analytiques</div>
+        <div class="step-text">Production de graphiques R (ggplot2) : courbes de tendance, box-plots par service, heatmaps saisonnières, cartes de performance. Intégration directe dans LaTeX.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Recommandations opérationnelles</div>
+        <div class="step-text">Chaque service évalué reçoit 2-3 recommandations concrètes, hiérarchisées par impact et faisabilité, avec indicateurs de suivi proposés.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <div class="step-title">Mise en page publication-grade</div>
+        <div class="step-text">Composition intégrale en LaTeX : table des matières, numérotation, bibliographie, mise en page professionnelle — prêt pour archivage et diffusion officielle.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="project-section" data-project="3" data-section="2">
+  <div class="sec-label">Stack</div>
+  <h2 class="sec-title">Technologies utilisées</h2>
+  <div class="stack-grid">
+    <div class="stack-card">
+      <span class="stack-card-icon">📊</span>
+      <div class="stack-card-name">R / RStudio</div>
+      <div class="stack-card-role">Analyse statistique</div>
+    </div>
+    <div class="stack-card">
+      <span class="stack-card-icon">📈</span>
+      <div class="stack-card-name">ggplot2</div>
+      <div class="stack-card-role">Visualisations</div>
+    </div>
+    <div class="stack-card">
+      <span class="stack-card-icon">📄</span>
+      <div class="stack-card-name">LaTeX</div>
+      <div class="stack-card-role">Mise en page</div>
+    </div>
+    <div class="stack-card">
+      <span class="stack-card-icon">🐍</span>
+      <div class="stack-card-name">Python</div>
+      <div class="stack-card-role">Prétraitement données</div>
+    </div>
+    <div class="stack-card">
+      <span class="stack-card-icon">🏥</span>
+      <div class="stack-card-name">SIGS / RIH</div>
+      <div class="stack-card-role">Données source</div>
+    </div>
+  </div>
+</div>
+
+<div class="project-section" data-project="3" data-section="3">
+  <div class="sec-label">Résultats</div>
+  <h2 class="sec-title">Un rapport de référence pour la direction</h2>
+  <div class="metrics">
+    <div class="metric-card">
+      <div class="metric-value">15-20</div>
+      <div class="metric-label">Pages de rapport</div>
+      <div class="metric-sub">Format publication · qualité archivage</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value green">N/N-1</div>
+      <div class="metric-label">Comparatif annuel</div>
+      <div class="metric-sub">Analyse de progression par service</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">4+</div>
+      <div class="metric-label">Services analysés</div>
+      <div class="metric-sub">Avec recommandations ciblées</div>
+    </div>
+  </div>
+  <div class="conclusion">
+    <div class="conclusion-title">Impact décisionnel</div>
+    <div class="conclusion-text">
+      Ce rapport a permis à la direction du CHP d'avoir pour la première fois une <strong>vision analytique comparative</strong> de l'activité annuelle, avec des recommandations opérationnelles directement actionnables. Il sert désormais de modèle pour les rapports annuels suivants.
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+let currentProject = 0;
+
+function showProject(idx) {
+  // Update project tab buttons
+  document.querySelectorAll('.project-tab').forEach((t, i) => {
+    t.classList.toggle('active', i === idx);
+  });
+  // Show/hide heroes
+  document.querySelectorAll('.project-hero').forEach(el => {
+    el.classList.toggle('active', parseInt(el.dataset.project) === idx);
+  });
+  // Show/hide sections navs
+  document.querySelectorAll('.sections-nav').forEach(el => {
+    el.classList.toggle('active', parseInt(el.dataset.project) === idx);
+  });
+  // Show/hide all sections — activate first section of new project
+  document.querySelectorAll('.project-section').forEach(el => {
+    el.classList.remove('active');
+  });
+  const firstSection = document.querySelector(`.project-section[data-project="${idx}"][data-section="0"]`);
+  if (firstSection) firstSection.classList.add('active');
+  // Reset section tabs for this project
+  document.querySelectorAll(`.sections-nav[data-project="${idx}"] .sec-tab`).forEach((t, i) => {
+    t.classList.toggle('active', i === 0);
+  });
+  currentProject = idx;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showSection(projectIdx, sectionIdx) {
+  // Update section tabs
+  document.querySelectorAll(`.sections-nav[data-project="${projectIdx}"] .sec-tab`).forEach((t, i) => {
+    t.classList.toggle('active', i === sectionIdx);
+  });
+  // Show/hide sections
+  document.querySelectorAll(`.project-section[data-project="${projectIdx}"]`).forEach(el => {
+    el.classList.toggle('active', parseInt(el.dataset.section) === sectionIdx);
+  });
+  // Scroll to content
+  const hero = document.querySelector(`.project-hero[data-project="${projectIdx}"]`);
+  if (hero) {
+    const top = hero.getBoundingClientRect().bottom + window.scrollY - 120;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+}
+
+// Check URL param for direct navigation
+const params = new URLSearchParams(window.location.search);
+const projParam = parseInt(params.get('p') || '0');
+if (projParam >= 0 && projParam <= 3) showProject(projParam);
+</script>
+</body>
+</html>

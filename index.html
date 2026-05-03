@@ -1,373 +1,1188 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ALLAM Mohamed Amin — Analyste de Données de Santé</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Allam Mohamed Amin — Data Health Analyst</title>
+<template id="__bundler_thumbnail" data-bg-color="#F5F0E8">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#F5F0E8"/>
+    <!-- Nav -->
+    <rect width="1200" height="56" fill="#EDE8DC"/>
+    <rect x="40" y="20" width="140" height="14" rx="2" fill="#C4522A" opacity="0.8"/>
+    <!-- Hero left -->
+    <rect x="60" y="110" width="100" height="10" rx="2" fill="#C4522A" opacity="0.6"/>
+    <rect x="60" y="132" width="440" height="48" rx="3" fill="#1C1C1A" opacity="0.85"/>
+    <rect x="60" y="192" width="320" height="28" rx="3" fill="#1C1C1A" opacity="0.6"/>
+    <rect x="60" y="234" width="380" height="14" rx="2" fill="#4A4845" opacity="0.4"/>
+    <rect x="60" y="262" width="200" height="14" rx="2" fill="#4A4845" opacity="0.3"/>
+    <!-- CTA buttons -->
+    <rect x="60" y="298" width="160" height="38" rx="3" fill="#C4522A"/>
+    <rect x="232" y="298" width="140" height="38" rx="3" fill="none" stroke="#C4522A" stroke-width="2"/>
+    <!-- Hero right: dashboard card -->
+    <rect x="660" y="90" width="480" height="300" rx="8" fill="#fff" opacity="0.9"/>
+    <rect x="660" y="90" width="480" height="36" rx="8" fill="#1C2B2A"/>
+    <rect x="660" y="126" width="240" height="128" fill="#F5F0E8"/>
+    <rect x="900" y="126" width="240" height="128" fill="#F5F0E8"/>
+    <rect x="660" y="254" width="240" height="136" fill="#F5F0E8"/>
+    <rect x="900" y="254" width="240" height="136" fill="#F5F0E8"/>
+    <!-- Accent bars -->
+    <rect x="680" y="290" width="140" height="6" rx="3" fill="#C4522A" opacity="0.6"/>
+    <rect x="920" y="290" width="100" height="6" rx="3" fill="#2D6B52" opacity="0.6"/>
+    <!-- Section dividers -->
+    <rect x="0" y="440" width="1200" height="160" fill="#EDE8DC"/>
+    <rect x="60" y="465" width="80" height="8" rx="2" fill="#C4522A" opacity="0.5"/>
+    <rect x="60" y="484" width="260" height="22" rx="2" fill="#1C1C1A" opacity="0.6"/>
+    <rect x="60" y="520" width="420" height="10" rx="2" fill="#4A4845" opacity="0.3"/>
+    <rect x="60" y="540" width="380" height="10" rx="2" fill="#4A4845" opacity="0.25"/>
+    <!-- Project cards row -->
+    <rect x="0" y="600" width="1200" height="200" fill="#F5F0E8"/>
+    <rect x="40" y="625" width="260" height="140" rx="6" fill="#fff" stroke="#C4522A" stroke-width="2"/>
+    <rect x="320" y="625" width="260" height="140" rx="6" fill="#fff"/>
+    <rect x="600" y="625" width="260" height="140" rx="6" fill="#fff"/>
+    <rect x="880" y="625" width="260" height="140" rx="6" fill="#fff"/>
+  </svg>
+</template>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #F5F0E8;
+    --bg2:      #EDE8DC;
+    --bg3:      #E4DDD0;
+    --fg:       #1C1C1A;
+    --fg2:      #4A4845;
+    --fg3:      #8C877E;
+    --accent:   #C4522A;
+    --accent2:  #2D6B52;
+    --border:   rgba(28,28,26,0.10);
+    --card:     rgba(28,28,26,0.04);
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --display: 'Syne', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: padding 0.3s;
+  }
+  nav.scrolled { padding: 0.85rem 3rem; }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg2);
+    text-decoration: none;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -3px; left: 0; right: 100%;
+    height: 1px; background: var(--accent);
+    transition: right 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--fg); }
+  .nav-links a:hover::after { right: 0; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 3rem 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(196,82,42,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(45,107,82,0.05) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 80%);
+    opacity: 0.4;
+  }
+
+  .hero-left { position: relative; z-index: 1; }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.3rem 0.75rem; border-radius: 2px;
+    margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
+  }
+  .hero-tag::before { content: '//'; opacity: 0.5; }
+
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
+  }
+  h1 .name-line { display: block; }
+  h1 .accent { color: var(--accent); }
+
+  .hero-subtitle {
+    margin-top: 1.25rem;
+    font-size: 1.05rem;
+    color: var(--fg2);
+    font-weight: 300;
+    max-width: 38ch;
+    opacity: 0; animation: fadeUp 0.7s 0.6s forwards;
+  }
+
+  .hero-contact {
+    display: flex; flex-wrap: wrap; gap: 1.25rem;
+    margin-top: 2rem;
+    opacity: 0; animation: fadeUp 0.7s 0.8s forwards;
+  }
+  .hero-contact a {
+    font-family: var(--mono); font-size: 0.78rem;
+    color: var(--fg2); text-decoration: none;
+    display: flex; align-items: center; gap: 0.4rem;
+    transition: color 0.2s;
+  }
+  .hero-contact a:hover { color: var(--accent); }
+  .hero-contact .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
+
+  .hero-cta {
+    display: flex; gap: 1rem; margin-top: 2.5rem;
+    opacity: 0; animation: fadeUp 0.7s 1.0s forwards;
+  }
+  .btn {
+    font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none;
+    padding: 0.75rem 1.75rem; border-radius: 3px;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    transition: all 0.2s;
+    cursor: pointer; border: none;
+  }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    font-weight: 500;
+  }
+  .btn-primary:hover { background: #b34724; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--fg2);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Hero right: stats dashboard */
+  .hero-right {
+    position: relative; z-index: 1;
+    opacity: 0; animation: fadeIn 1s 0.9s forwards;
+  }
+  .stats-card {
+    background: #fff;
+    border: 1px solid rgba(28,28,26,0.12);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(28,28,26,0.10);
+  }
+  .stats-card-header {
+    background: #1C2B2A;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 0.6rem 1rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .traffic-light {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+  .stats-card-header span {
+    font-family: var(--mono); font-size: 0.72rem; color: #9ab5af;
+    margin-left: 0.5rem;
+  }
+  .stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: rgba(28,28,26,0.08);
+  }
+  .stat-cell {
+    background: #fff;
+    padding: 1.25rem 1.5rem;
+  }
+  .stat-cell-label {
+    font-family: var(--mono); font-size: 0.65rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: #8C877E; margin-bottom: 0.35rem;
+  }
+  .stat-cell-value {
+    font-family: var(--display); font-size: 1.8rem;
+    font-weight: 700; color: #1C1C1A;
+    line-height: 1;
+  }
+  .stat-cell-value.accent { color: var(--accent2); }
+  .stat-cell-sub {
+    font-family: var(--mono); font-size: 0.65rem;
+    color: #8C877E; margin-top: 0.25rem;
+  }
+
+  .chart-bar-area {
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid rgba(28,28,26,0.08);
+    background: #fff;
+  }
+  .chart-bar-label {
+    font-family: var(--mono); font-size: 0.65rem;
+    color: #8C877E; letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .bar-row {
+    display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;
+  }
+  .bar-name {
+    font-family: var(--mono); font-size: 0.68rem;
+    color: #4A4845; width: 4.5rem; flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1; height: 5px; background: rgba(28,28,26,0.10); border-radius: 99px; overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%; border-radius: 99px; background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    animation: barGrow 1s ease forwards;
+  }
+  .bar-pct {
+    font-family: var(--mono); font-size: 0.65rem; color: #8C877E; width: 2rem; text-align: right;
+  }
+
+  @keyframes barGrow { to { transform: scaleX(1); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 3rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-family: var(--mono); font-size: 0.7rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::after {
+    content: ''; flex: 1; max-width: 60px;
+    height: 1px; background: var(--accent); opacity: 0.4;
+  }
+  .section-title {
+    font-family: var(--display); font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--bg2); }
+  .about-grid {
+    display: grid; grid-template-columns: 3fr 2fr; gap: 5rem; align-items: start;
+  }
+  .about-text { font-size: 1.05rem; color: var(--fg2); line-height: 1.8; }
+  .about-text p + p { margin-top: 1rem; }
+  .about-text strong { color: var(--fg); font-weight: 500; }
+
+  .about-sidebar { display: flex; flex-direction: column; gap: 1rem; }
+  .info-block {
+    background: #fff; border: 1px solid var(--border); border-radius: 6px;
+    padding: 1rem 1.25rem;
+  }
+  .info-block-label {
+    font-family: var(--mono); font-size: 0.65rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--fg3); margin-bottom: 0.35rem;
+  }
+  .info-block-value {
+    font-size: 0.92rem; color: var(--fg);
+  }
+  .info-block-value a { color: var(--accent); text-decoration: none; }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--bg); }
+  .exp-timeline { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 0 3rem; position: relative;
+    padding-bottom: 3rem;
+  }
+  .exp-item:last-child { padding-bottom: 0; }
+  .exp-item::before {
+    content: '';
+    position: absolute; left: 210px; top: 6px; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .exp-item:last-child::before { display: none; }
+  .exp-item::after {
+    content: '';
+    position: absolute; left: 205px; top: 6px;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 12px var(--accent);
+  }
+  .exp-date {
+    font-family: var(--mono); font-size: 0.72rem;
+    color: var(--fg3); padding-top: 0.15rem;
+    text-align: right;
+  }
+  .exp-date .present {
+    display: inline-block; margin-top: 0.3rem;
+    background: rgba(196,82,42,0.12);
+    color: var(--accent); border-radius: 2px;
+    padding: 0.1rem 0.4rem; font-size: 0.65rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .exp-content { padding-left: 1.5rem; }
+  .exp-title {
+    font-family: var(--display); font-size: 1.15rem;
+    font-weight: 600; margin-bottom: 0.25rem;
+  }
+  .exp-org {
+    font-family: var(--mono); font-size: 0.75rem;
+    color: var(--accent); margin-bottom: 0.75rem;
+  }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .exp-bullets li {
+    font-size: 0.92rem; color: var(--fg2);
+    padding-left: 1.25rem; position: relative; line-height: 1.6;
+  }
+  .exp-bullets li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--accent); font-size: 0.75rem;
+  }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--bg2); }
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;
+  }
+  .project-card {
+    background: #fff; border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.75rem; display: flex; flex-direction: column; gap: 0.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .project-card:hover { border-color: rgba(28,28,26,0.22); transform: translateY(-3px); cursor: pointer; }
+  a.project-card { text-decoration: none; color: inherit; }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-status {
+    font-family: var(--mono); font-size: 0.65rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent);
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .project-status::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .project-title {
+    font-family: var(--display); font-size: 1rem;
+    font-weight: 600; color: var(--fg);
+  }
+  .project-desc { font-size: 0.88rem; color: var(--fg2); line-height: 1.6; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
+  .tag {
+    font-family: var(--mono); font-size: 0.63rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.2rem 0.6rem; border-radius: 2px;
+    background: rgba(196,82,42,0.08);
+    color: var(--accent);
+    border: 1px solid rgba(196,82,42,0.22);
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--bg); }
+  .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .skill-group {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden;
+  }
+  .skill-group-header {
+    background: var(--bg3); border-bottom: 1px solid var(--border);
+    padding: 0.75rem 1.25rem;
+    font-family: var(--mono); font-size: 0.7rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); display: flex; align-items: center; gap: 0.5rem;
+  }
+  .skill-group-header::before { content: '$ '; color: var(--fg3); }
+  .skill-list { padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.85rem; }
+  .skill-row {
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .skill-name {
+    font-family: var(--mono); font-size: 0.78rem;
+    color: var(--fg2); width: 130px; flex-shrink: 0;
+  }
+  .skill-bar-track {
+    flex: 1; height: 4px; background: rgba(28,28,26,0.10); border-radius: 99px; overflow: hidden;
+  }
+  .skill-bar-fill {
+    height: 100%; border-radius: 99px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  /* ── EDUCATION ── */
+  #education { background: var(--bg2); }
+  .edu-cards { display: flex; flex-direction: column; gap: 1.25rem; }
+  .edu-card {
+    background: #fff; border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem 2rem; display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem 2rem; align-items: start;
+  }
+  .edu-degree {
+    font-family: var(--display); font-size: 1.05rem; font-weight: 600;
+  }
+  .edu-school {
+    font-family: var(--mono); font-size: 0.75rem; color: var(--accent); margin-top: 0.25rem;
+  }
+  .edu-modules {
+    font-size: 0.85rem; color: var(--fg3); margin-top: 0.5rem;
+    grid-column: 1 / -1;
+  }
+  .edu-year {
+    font-family: var(--mono); font-size: 0.75rem;
+    color: var(--fg3); text-align: right; white-space: nowrap;
+  }
+  .edu-mention {
+    display: inline-block; margin-top: 0.3rem;
+    background: rgba(45,107,82,0.12);
+    color: var(--accent2); border-radius: 2px;
+    padding: 0.15rem 0.5rem; font-size: 0.65rem;
+    font-family: var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  /* ── LANGUAGES ── */
+  .lang-row { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem; }
+  .lang-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 6px; padding: 1.25rem 1.75rem; text-align: center;
+    min-width: 130px;
+  }
+  .lang-name { font-family: var(--display); font-size: 1rem; font-weight: 600; }
+  .lang-level {
+    font-family: var(--mono); font-size: 0.68rem;
+    color: var(--fg3); margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .lang-dots { display: flex; gap: 4px; justify-content: center; margin-top: 0.6rem; }
+  .lang-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(28,28,26,0.12); }
+  .lang-dot.filled { background: var(--accent2); }
+
+  /* ── QUALITIES ── */
+  .qualities-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+  .quality-pill {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 4px; padding: 0.5rem 1.25rem;
+    font-size: 0.88rem; color: var(--fg2);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .quality-pill::before { content: '✦'; font-size: 0.6rem; color: var(--accent); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--bg); border-top: 1px solid var(--border); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .contact-heading {
+    font-family: var(--display); font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+  }
+  .contact-heading .accent { color: var(--accent); }
+  .contact-sub { font-size: 1rem; color: var(--fg2); margin-top: 1rem; line-height: 1.7; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 6px; padding: 1rem 1.25rem;
+    text-decoration: none; color: var(--fg);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); background: rgba(196,82,42,0.05); }
+  .contact-link-icon {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(196,82,42,0.10);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .contact-link-info {}
+  .contact-link-label {
+    font-family: var(--mono); font-size: 0.65rem;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg3);
+  }
+  .contact-link-value { font-size: 0.92rem; color: var(--fg); margin-top: 0.1rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 1.5rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  footer .copy {
+    font-family: var(--mono); font-size: 0.68rem; color: var(--fg3);
+  }
+  footer .made {
+    font-family: var(--mono); font-size: 0.68rem; color: var(--fg3);
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── TWEAKS PANEL ── */
+  #tweaks-panel {
+    display: none;
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.25rem; width: 240px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    font-family: var(--mono); font-size: 0.78rem;
+  }
+  #tweaks-panel.visible { display: block; }
+  .tweaks-title {
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--fg3); margin-bottom: 1rem; display: flex;
+    justify-content: space-between; align-items: center;
+  }
+  .tweaks-title button {
+    background: none; border: none; color: var(--fg3); cursor: pointer;
+    font-size: 1rem; line-height: 1;
+  }
+  .tweak-row { margin-bottom: 0.85rem; }
+  .tweak-row label { display: block; color: var(--fg2); margin-bottom: 0.4rem; font-size: 0.7rem; }
+  .tweak-row select, .tweak-row input[type=color] {
+    width: 100%; background: var(--bg2); border: 1px solid var(--border);
+    color: var(--fg); border-radius: 4px; padding: 0.4rem 0.5rem;
+    font-family: var(--mono); font-size: 0.72rem; cursor: pointer;
+  }
+  .tweak-row input[type=color] { padding: 0.2rem; height: 32px; }
+  .tweak-row input[type=range] {
+    width: 100%; accent-color: var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    #hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; }
+    .hero-right { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .skills-layout { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .exp-item { grid-template-columns: 1fr; }
+    .exp-item::before, .exp-item::after { display: none; }
+    .exp-date { text-align: left; }
+    .exp-content { padding-left: 0; padding-top: 0.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav id="navbar">
-    <div class="nav-inner">
-      <span class="nav-logo">AMA</span>
-      <ul class="nav-links">
-        <li><a href="#about">Profil</a></li>
-        <li><a href="#experience">Expérience</a></li>
-        <li><a href="#projects">Projets</a></li>
-        <li><a href="#skills">Compétences</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
-    </div>
-  </nav>
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">AMA portfolio</a>
+  <ul class="nav-links">
+    <li><a href="#about">Profil</a></li>
+    <li><a href="#experience">Expérience</a></li>
+    <li><a href="#projects">Projets</a></li>
+    <li><a href="#skills">Compétences</a></li>
+    <li><a href="#education">Formation</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-  <!-- HERO -->
-  <header id="hero">
-    <div class="hero-content">
-      <div class="hero-badge">Disponible pour missions freelance</div>
-      <h1>ALLAM<br /><span class="accent">Mohamed Amin</span></h1>
-      <p class="hero-subtitle">Technicien en Statistiques Sanitaires<br />Analyste de Données de Santé</p>
-      <p class="hero-location">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Ouezzane, Maroc
-      </p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn btn-primary">Me contacter</a>
-        <a href="#projects" class="btn btn-outline">Voir mes projets</a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="avatar-ring">
-        <img src="photo.jpg" alt="ALLAM Mohamed Amin" class="avatar-photo" />
-      </div>
-      <div class="floating-card card-1">
-        <span class="card-icon">📊</span>
-        <span>Power BI</span>
-      </div>
-      <div class="floating-card card-2">
-        <span class="card-icon">🐍</span>
-        <span>Python</span>
-      </div>
-      <div class="floating-card card-3">
-        <span class="card-icon">🏥</span>
-        <span>SIGS / RIH</span>
-      </div>
-    </div>
-    <div class="hero-scroll">
-      <span>Défiler</span>
-      <div class="scroll-arrow"></div>
-    </div>
-  </header>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
 
-  <!-- ABOUT -->
-  <section id="about" class="section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Profil</span>
-        <h2>Qui suis-je ?</h2>
+  <div class="hero-left">
+    <div class="hero-tag">Technicien · Analyste · Data</div>
+    <h1>
+      <span class="name-line">ALLAM</span>
+      <span class="name-line">Mohamed <span class="accent">Amin</span></span>
+    </h1>
+    <p class="hero-subtitle">
+      Technicien en Statistiques Sanitaires & Analyste de Données de Santé au Ministère de la Santé — Maroc.
+    </p>
+    <div class="hero-contact">
+      <a href="tel:+212684456737">
+        <span class="dot"></span>+212 684-456737
+      </a>
+      <a href="mailto:allammohamedamin34@gmail.com">
+        <span class="dot"></span>allammohamedamin34@gmail.com
+      </a>
+      <a href="#">
+        <span class="dot"></span>Ouezzane, Maroc
+      </a>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">Voir mes projets →</a>
+      <a href="#contact" class="btn btn-outline">Me contacter</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="stats-card">
+      <div class="stats-card-header">
+        <div class="traffic-light" style="background:#ff5f57"></div>
+        <div class="traffic-light" style="background:#ffbd2e"></div>
+        <div class="traffic-light" style="background:#28ca41"></div>
+        <span>dashboard_activite.py — SIGS Ouezzane</span>
       </div>
-      <div class="about-grid">
+      <div class="stats-grid">
+        <div class="stat-cell">
+          <div class="stat-cell-label">Poste actuel</div>
+          <div class="stat-cell-value accent" style="font-size:1rem; padding-top:0.25rem;">Tech. Stats<br>Sanitaires</div>
+          <div class="stat-cell-sub">Ministère Santé · CHP</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-cell-label">Expérience</div>
+          <div class="stat-cell-value accent">1+</div>
+          <div class="stat-cell-sub">an en poste · 2024→</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-cell-label">Projets réalisés</div>
+          <div class="stat-cell-value">4</div>
+          <div class="stat-cell-sub">portfolio actif</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-cell-label">Formation</div>
+          <div class="stat-cell-value" style="font-size:1.1rem; padding-top:0.1rem">Mention<br>Bien</div>
+          <div class="stat-cell-sub">ISPITS Rabat · 2024</div>
+        </div>
+      </div>
+      <div class="chart-bar-area">
+        <div class="chart-bar-label">Maîtrise des outils</div>
+        <div class="bar-row">
+          <span class="bar-name">Python</span>
+          <div class="bar-track"><div class="bar-fill" style="animation-delay:1.1s; width:85%"></div></div>
+          <span class="bar-pct">85%</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">Power BI</span>
+          <div class="bar-track"><div class="bar-fill" style="animation-delay:1.2s; width:80%"></div></div>
+          <span class="bar-pct">80%</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">Excel</span>
+          <div class="bar-track"><div class="bar-fill" style="animation-delay:1.3s; width:90%"></div></div>
+          <span class="bar-pct">90%</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">R / SQL</span>
+          <div class="bar-track"><div class="bar-fill" style="animation-delay:1.4s; width:70%"></div></div>
+          <span class="bar-pct">70%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">01 — Profil</div>
+    <div class="about-grid reveal">
+      <div>
+        <h2 class="section-title">Qui suis-je ?</h2>
         <div class="about-text">
           <p>
-            Technicien en statistiques sanitaires diplômé de l'<strong>ISPITS Rabat</strong>, en poste au
-            <strong>Ministère de la Santé et de la Protection Sociale — CHP Ouezzane</strong>.
+            Technicien en statistiques sanitaires diplômé de l'<strong>ISPITS Rabat</strong>, actuellement en poste au <strong>Ministère de la Santé et de la Protection Sociale</strong> au niveau du CHP Ouezzane.
           </p>
           <p>
-            Spécialisé dans la collecte, la fiabilisation et l'analyse de données hospitalières dans le cadre du
-            <strong>Système d'Information Sanitaire (SIGS)</strong>. Je développe en parallèle une activité de conseil
-            indépendant en analyse statistique et visualisation de données dédiée au pilotage analytique des cliniques
-            privées au Maroc.
+            Spécialisé dans la collecte, la fiabilisation et l'analyse de données hospitalières dans le cadre du <strong>Système d'Information Sanitaire (SIGS)</strong>. Je produis des rapports statistiques mensuels et trimestriels, et assure le suivi des indicateurs clés de performance (DMS, TOM, IR, TR) sur les services prioritaires.
           </p>
           <p>
-            Mon objectif : transformer les données brutes en leviers de décision opérationnels pour les établissements de santé.
+            En parallèle, je développe une activité de conseil indépendant en <strong>analyse statistique et visualisation de données</strong>, dédiée au pilotage analytique des cliniques privées au Maroc.
           </p>
         </div>
-        <div class="about-stats">
-          <div class="stat-card">
-            <span class="stat-number">2+</span>
-            <span class="stat-label">Ans d'expérience</span>
+      </div>
+      <div class="about-sidebar">
+        <div class="info-block">
+          <div class="info-block-label">Localisation</div>
+          <div class="info-block-value">Ouezzane, Maroc</div>
+        </div>
+        <div class="info-block">
+          <div class="info-block-label">Email</div>
+          <div class="info-block-value"><a href="mailto:allammohamedamin34@gmail.com">allammohamedamin34@gmail.com</a></div>
+        </div>
+        <div class="info-block">
+          <div class="info-block-label">Téléphone</div>
+          <div class="info-block-value"><a href="tel:+212684456737">+212 684-456737</a></div>
+        </div>
+        <div class="info-block">
+          <div class="info-block-label">Domaine</div>
+          <div class="info-block-value">Statistiques Sanitaires · Data Santé</div>
+        </div>
+        <div class="info-block">
+          <div class="info-block-label">Disponibilité</div>
+          <div class="info-block-value" style="color: var(--accent);">En poste · Conseil disponible</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">02 — Expérience</div>
+    <h2 class="section-title">Parcours professionnel</h2>
+    <div class="exp-timeline">
+
+      <div class="exp-item reveal">
+        <div class="exp-date">
+          2024<br>→ <span class="present">Présent</span>
+        </div>
+        <div class="exp-content">
+          <div class="exp-title">Technicien en Statistiques Sanitaires</div>
+          <div class="exp-org">Ministère de la Santé et de la Protection Sociale · CHP Ouezzane</div>
+          <ul class="exp-bullets">
+            <li>Collecte, contrôle qualité et saisie des données d'activité hospitalière dans le cadre du SIGS.</li>
+            <li>Production de rapports statistiques mensuels et trimestriels destinés à la direction et aux services techniques.</li>
+            <li>Suivi des indicateurs clés : DMS, TOM, IR, TR, flux patients — services Urgence, Maternité, Hospitalisation, Pharmacie.</li>
+            <li>Élaboration de canevas de collecte standardisés alignés sur les nomenclatures RIH/SIGS.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-date">2022 – 2024</div>
+        <div class="exp-content">
+          <div class="exp-title">Stages cliniques et statistiques (S3 – S6)</div>
+          <div class="exp-org">Cycle de formation pratique · ISPITS Rabat</div>
+          <ul class="exp-bullets">
+            <li><strong>S3 & S4</strong> — Observation et participation aux circuits de saisie et de traitement des données hospitalières.</li>
+            <li><strong>S5</strong> — Contribution à l'analyse statistique de données épidémiologiques.</li>
+            <li><strong>S6</strong> — Application avancée des compétences en biostatistique et élaboration de rapports sanitaires complets.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">03 — Projets</div>
+    <h2 class="section-title">Portfolio de réalisations</h2>
+    <div class="projects-grid">
+
+      <a href="Projet.html?p=0" class="project-card reveal" style="text-decoration:none;color:inherit;">
+        <div class="project-status">Réalisé</div>
+        <div class="project-title">Reporting hospitalier mensuel automatisé</div>
+        <div class="project-desc">
+          Script Python (pandas) générant automatiquement un rapport LaTeX d'activité mensuelle à partir de données brutes hospitalières. Élimination complète de la saisie manuelle dans la production des rapports de direction.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">pandas</span>
+          <span class="tag">LaTeX</span>
+          <span class="tag">Automatisation</span>
+        </div>
+        <div style="margin-top:0.75rem;font-family:var(--mono);font-size:0.68rem;color:var(--accent);letter-spacing:0.06em;">Voir le détail →</div>
+      </a>
+
+      <a href="Projet.html?p=1" class="project-card reveal" style="text-decoration:none;color:inherit;">
+        <div class="project-status">Réalisé</div>
+        <div class="project-title">Canevas de collecte multi-services</div>
+        <div class="project-desc">
+          Conception de templates standardisés de collecte de données pour quatre services prioritaires (Urgence, Maternité, Hospitalisation, Pharmacie), livrés en formats Markdown et Excel.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Excel</span>
+          <span class="tag">Markdown</span>
+          <span class="tag">SIGS</span>
+          <span class="tag">RIH</span>
+        </div>
+        <div style="margin-top:0.75rem;font-family:var(--mono);font-size:0.68rem;color:var(--accent);letter-spacing:0.06em;">Voir le détail →</div>
+      </a>
+
+      <a href="Projet.html?p=2" class="project-card reveal" style="text-decoration:none;color:inherit;">
+        <div class="project-status">Réalisé</div>
+        <div class="project-title">Dashboard interactif Clinique</div>
+        <div class="project-desc">
+          Tableau de bord Power BI sur données synthétiques d'une clinique fictive de 60 lits / 4 blocs : taux d'occupation, flux patients, comparatifs N vs N-1, rentabilité par service. Conçu pour démonstrations clients.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Dashboard</span>
+          <span class="tag">KPI</span>
+          <span class="tag">Conseil</span>
+        </div>
+        <div style="margin-top:0.75rem;font-family:var(--mono);font-size:0.68rem;color:var(--accent);letter-spacing:0.06em;">Voir le détail →</div>
+      </a>
+
+      <a href="Projet.html?p=3" class="project-card reveal" style="text-decoration:none;color:inherit;">
+        <div class="project-status">Réalisé</div>
+        <div class="project-title">Étude comparative annuelle d'activité</div>
+        <div class="project-desc">
+          Rapport analytique de 15-20 pages au format publication : analyse de la performance par service, détection des leviers de croissance, recommandations opérationnelles.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Analyse</span>
+          <span class="tag">LaTeX</span>
+          <span class="tag">Épidémiologie</span>
+          <span class="tag">Reporting</span>
+        </div>
+        <div style="margin-top:0.75rem;font-family:var(--mono);font-size:0.68rem;color:var(--accent);letter-spacing:0.06em;">Voir le détail →</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">04 — Compétences</div>
+    <h2 class="section-title">Stack technique</h2>
+    <div class="skills-layout reveal">
+
+      <div class="skill-group">
+        <div class="skill-group-header">Programmation & Data</div>
+        <div class="skill-list">
+          <div class="skill-row">
+            <span class="skill-name">Python (pandas)</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
           </div>
-          <div class="stat-card">
-            <span class="stat-number">4</span>
-            <span class="stat-label">Projets réalisés</span>
+          <div class="skill-row">
+            <span class="skill-name">R / RStudio</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:70%"></div></div>
           </div>
-          <div class="stat-card">
-            <span class="stat-number">4</span>
-            <span class="stat-label">Services suivis</span>
+          <div class="skill-row">
+            <span class="skill-name">SQL</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:72%"></div></div>
           </div>
-          <div class="stat-card">
-            <span class="stat-number">3</span>
-            <span class="stat-label">Langues</span>
+          <div class="skill-row">
+            <span class="skill-name">Microsoft Excel</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Power BI</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-header">Statistiques & Domaine</div>
+        <div class="skill-list">
+          <div class="skill-row">
+            <span class="skill-name">Biostatistiques</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:82%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Épidémiologie</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:78%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">SIGS / RIH</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:88%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Indicateurs KPI</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">LaTeX / Reporting</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Languages & Qualities -->
+    <div style="margin-top: 3rem;" class="reveal">
+      <div class="section-label" style="margin-bottom:1rem;">Langues</div>
+      <div class="lang-row">
+        <div class="lang-card">
+          <div class="lang-name">Arabe</div>
+          <div class="lang-level">Natif</div>
+          <div class="lang-dots">
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot filled"></div>
+          </div>
+        </div>
+        <div class="lang-card">
+          <div class="lang-name">Français</div>
+          <div class="lang-level">Avancé</div>
+          <div class="lang-dots">
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot"></div>
+          </div>
+        </div>
+        <div class="lang-card">
+          <div class="lang-name">Anglais</div>
+          <div class="lang-level">Intermédiaire</div>
+          <div class="lang-dots">
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot"></div>
+            <div class="lang-dot"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 2.5rem;">
+        <div class="section-label" style="margin-bottom:1rem;">Qualités professionnelles</div>
+        <div class="qualities-grid">
+          <div class="quality-pill">Esprit d'analyse et de synthèse</div>
+          <div class="quality-pill">Rigueur et autonomie</div>
+          <div class="quality-pill">Curiosité scientifique</div>
+          <div class="quality-pill">Sens de l'initiative entrepreneuriale</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-label">05 — Formation</div>
+    <h2 class="section-title">Parcours académique</h2>
+    <div class="edu-cards reveal">
+
+      <div class="edu-card">
+        <div>
+          <div class="edu-degree">Licence Professionnelle en Statistiques Sanitaires</div>
+          <div class="edu-school">ISPITS Rabat · Rabat, Maroc</div>
+          <div class="edu-modules">
+            Modules : Biostatistiques · Épidémiologie · Informatique médicale · Bioinformatique · Analyse de données · Santé publique
+          </div>
+        </div>
+        <div style="text-align:right">
+          <div class="edu-year">2021 – 2024</div>
+          <div class="edu-mention">Mention Bien</div>
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <div>
+          <div class="edu-degree">Baccalauréat — Sciences Physiques</div>
+          <div class="edu-school">Lycée Public · Maroc</div>
+        </div>
+        <div style="text-align:right">
+          <div class="edu-year">2021</div>
+          <div class="edu-mention">Mention Bien</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid reveal">
+      <div>
+        <div class="section-label">06 — Contact</div>
+        <div class="contact-heading">
+          Travaillons<br><span class="accent">ensemble.</span>
+        </div>
+        <p class="contact-sub">
+          Disponible pour des missions de conseil en analyse de données de santé, visualisation et reporting pour cliniques privées au Maroc.
+        </p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:allammohamedamin34@gmail.com" class="contact-link">
+          <div class="contact-link-icon">✉</div>
+          <div class="contact-link-info">
+            <div class="contact-link-label">Email</div>
+            <div class="contact-link-value">allammohamedamin34@gmail.com</div>
+          </div>
+        </a>
+        <a href="tel:+212684456737" class="contact-link">
+          <div class="contact-link-icon">☎</div>
+          <div class="contact-link-info">
+            <div class="contact-link-label">Téléphone</div>
+            <div class="contact-link-value">+212 684-456737</div>
+          </div>
+        </a>
+        <div class="contact-link" style="cursor:default">
+          <div class="contact-link-icon">📍</div>
+          <div class="contact-link-info">
+            <div class="contact-link-label">Localisation</div>
+            <div class="contact-link-value">Ouezzane, Maroc</div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- EXPERIENCE -->
-  <section id="experience" class="section section-alt">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Parcours</span>
-        <h2>Expérience & Formation</h2>
-      </div>
-      <div class="timeline">
+<!-- FOOTER -->
+<footer>
+  <span class="copy">© 2026 Allam Mohamed Amin. Tous droits réservés.</span>
+  <span class="made">Technicien · Statistiques Sanitaires · Maroc</span>
+</footer>
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">2024 — Présent</div>
-          <div class="timeline-card">
-            <h3>Technicien en Statistiques Sanitaires</h3>
-            <p class="timeline-org">Ministère de la Santé et de la Protection Sociale — CHP Ouezzane</p>
-            <ul>
-              <li>Collecte, contrôle qualité et saisie des données d'activité hospitalière dans le cadre du SIGS.</li>
-              <li>Production de rapports statistiques mensuels et trimestriels destinés à la direction.</li>
-              <li>Suivi des indicateurs KPI (DMS, TOM, IR, TR, flux patients) sur les services prioritaires : Urgence, Maternité, Hospitalisation, Pharmacie.</li>
-              <li>Élaboration de canevas de collecte standardisés alignés sur les nomenclatures RIH/SIGS.</li>
-            </ul>
-          </div>
-        </div>
+<!-- TWEAKS PANEL -->
+<div id="tweaks-panel">
+  <div class="tweaks-title">
+    Tweaks
+    <button id="tweaks-close">×</button>
+  </div>
+  <div class="tweak-row">
+    <label>Couleur accent</label>
+    <input type="color" id="tweak-accent" value="#C4522A">
+  </div>
+  <div class="tweak-row">
+    <label>Thème fond</label>
+    <select id="tweak-theme">
+      <option value="cream">Crème (défaut)</option>
+      <option value="blanc">Blanc pur</option>
+      <option value="sombre">Sombre</option>
+    </select>
+  </div>
+  <div class="tweak-row">
+    <label>Taille de texte de base</label>
+    <input type="range" id="tweak-fontsize" min="14" max="20" value="16">
+  </div>
+</div>
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">2022 — 2024</div>
-          <div class="timeline-card">
-            <h3>Stages cliniques et statistiques (S3 — S6)</h3>
-            <p class="timeline-org">Cycle de formation pratique — ISPITS Rabat</p>
-            <ul>
-              <li><strong>S3 & S4</strong> — Participation aux circuits de saisie et traitement des données hospitalières.</li>
-              <li><strong>S5</strong> — Analyse statistique de données épidémiologiques.</li>
-              <li><strong>S6</strong> — Application avancée en biostatistique et élaboration de rapports sanitaires complets.</li>
-            </ul>
-          </div>
-        </div>
+<script>
+// ── NAV SCROLL ──
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
 
-        <div class="timeline-item timeline-edu">
-          <div class="timeline-dot timeline-dot-edu"></div>
-          <div class="timeline-date">2021 — 2024</div>
-          <div class="timeline-card">
-            <h3>Licence Professionnelle en Statistiques Sanitaires</h3>
-            <p class="timeline-org">ISPITS Rabat — <span class="mention">Mention Bien</span></p>
-            <p>Biostatistiques · Épidémiologie · Informatique médicale · Bioinformatique · Santé publique</p>
-          </div>
-        </div>
+// ── SCROLL REVEAL ──
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+reveals.forEach(el => observer.observe(el));
 
-        <div class="timeline-item timeline-edu">
-          <div class="timeline-dot timeline-dot-edu"></div>
-          <div class="timeline-date">2021</div>
-          <div class="timeline-card">
-            <h3>Baccalauréat — Sciences Physiques</h3>
-            <p class="timeline-org">Lycée Public, Maroc — <span class="mention">Mention Bien</span></p>
-          </div>
-        </div>
+// ── TWEAKS PROTOCOL ──
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accentColor": "#c77d29",
+  "theme": "cream",
+  "fontSize": 20
+}/*EDITMODE-END*/;
 
-      </div>
-    </div>
-  </section>
+const panel = document.getElementById('tweaks-panel');
 
-  <!-- PROJECTS -->
-  <section id="projects" class="section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Portfolio</span>
-        <h2>Projets réalisés</h2>
-      </div>
-      <div class="projects-grid">
+window.addEventListener('message', e => {
+  if (e.data?.type === '__activate_edit_mode') panel.classList.add('visible');
+  if (e.data?.type === '__deactivate_edit_mode') panel.classList.remove('visible');
+});
+window.parent.postMessage({ type: '__edit_mode_available' }, '*');
 
-        <div class="project-card">
-          <div class="project-icon">📄</div>
-          <div class="project-badge">Réalisé</div>
-          <h3>Reporting hospitalier mensuel automatisé</h3>
-          <p>Script Python (pandas) générant automatiquement un rapport LaTeX d'activité mensuelle à partir de données brutes hospitalières. Élimination totale de la saisie manuelle.</p>
-          <div class="project-tags">
-            <span>Python</span><span>pandas</span><span>LaTeX</span><span>Automatisation</span>
-          </div>
-        </div>
+document.getElementById('tweaks-close').addEventListener('click', () => {
+  panel.classList.remove('visible');
+  window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+});
 
-        <div class="project-card">
-          <div class="project-icon">📋</div>
-          <div class="project-badge">Réalisé</div>
-          <h3>Canevas de collecte multi-services</h3>
-          <p>Templates standardisés de collecte de données pour quatre services prioritaires (Urgence, Maternité, Hospitalisation, Pharmacie), livrés en formats Markdown et Excel.</p>
-          <div class="project-tags">
-            <span>Excel</span><span>Markdown</span><span>SIGS</span><span>RIH</span>
-          </div>
-        </div>
+function applyTweaks(t) {
+  document.documentElement.style.setProperty('--accent', t.accentColor);
+  document.body.style.fontSize = t.fontSize + 'px';
+  const themes = {
+    cream:    { bg: '#F5F0E8', bg2: '#EDE8DC', bg3: '#E4DDD0', fg: '#1C1C1A', nav: 'rgba(245,240,232,0.92)' },
+    blanc:    { bg: '#FAFAF7', bg2: '#F2F2EE', bg3: '#E8E8E3', fg: '#1C1C1A', nav: 'rgba(250,250,247,0.92)' },
+    sombre:   { bg: '#1A1714', bg2: '#221F1B', bg3: '#2A2620', fg: '#E8E4DC', nav: 'rgba(26,23,20,0.92)' },
+  };
+  const th = themes[t.theme] || themes.cream;
+  document.documentElement.style.setProperty('--bg', th.bg);
+  document.documentElement.style.setProperty('--bg2', th.bg2);
+  document.documentElement.style.setProperty('--bg3', th.bg3);
+  if (th.fg) document.documentElement.style.setProperty('--fg', th.fg);
+  const nav = document.querySelector('nav');
+  if (nav) nav.style.background = th.nav || 'rgba(245,240,232,0.92)';
+}
 
-        <div class="project-card featured">
-          <div class="project-icon">📊</div>
-          <div class="project-badge">Réalisé</div>
-          <h3>Dashboard interactif — Clinique privée</h3>
-          <p>Tableau de bord Power BI sur données synthétiques d'une clinique fictive de 60 lits / 4 blocs : taux d'occupation, flux patients, comparatifs N vs N-1, rentabilité par service.</p>
-          <div class="project-tags">
-            <span>Power BI</span><span>DAX</span><span>KPIs</span><span>Data viz</span>
-          </div>
-        </div>
+applyTweaks(TWEAK_DEFAULTS);
 
-        <div class="project-card">
-          <div class="project-icon">📈</div>
-          <div class="project-badge">Réalisé</div>
-          <h3>Étude comparative annuelle d'activité</h3>
-          <p>Rapport analytique de 15–20 pages au format publication : analyse de la performance par service, détection des leviers de croissance, recommandations opérationnelles.</p>
-          <div class="project-tags">
-            <span>R / RStudio</span><span>LaTeX</span><span>Épidémiologie</span><span>Analyse</span>
-          </div>
-        </div>
+document.getElementById('tweak-accent').value = TWEAK_DEFAULTS.accentColor || '#C4522A';
+document.getElementById('tweak-theme').value = TWEAK_DEFAULTS.theme || 'cream';
+document.getElementById('tweak-fontsize').value = TWEAK_DEFAULTS.fontSize || 16;
 
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills" class="section section-alt">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Savoir-faire</span>
-        <h2>Compétences</h2>
-      </div>
-      <div class="skills-grid">
-
-        <div class="skill-group">
-          <h4>Programmation & Outils</h4>
-          <div class="skill-pills">
-            <span class="pill pill-primary">Python (pandas)</span>
-            <span class="pill pill-primary">R / RStudio</span>
-            <span class="pill pill-primary">SQL</span>
-            <span class="pill pill-primary">Power BI</span>
-            <span class="pill pill-primary">Excel avancé</span>
-            <span class="pill pill-primary">LaTeX</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <h4>Statistiques & Santé</h4>
-          <div class="skill-pills">
-            <span class="pill pill-secondary">Biostatistiques</span>
-            <span class="pill pill-secondary">Épidémiologie</span>
-            <span class="pill pill-secondary">Analyse descriptive</span>
-            <span class="pill pill-secondary">Analyse corrélationnelle</span>
-            <span class="pill pill-secondary">Indicateurs KPI (DMS, TOM, IR, TR)</span>
-            <span class="pill pill-secondary">Nomenclatures RIH/SIGS</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <h4>Data & Documentation</h4>
-          <div class="skill-pills">
-            <span class="pill pill-accent">Bases de données sanitaires</span>
-            <span class="pill pill-accent">Contrôle qualité données</span>
-            <span class="pill pill-accent">Reporting automatisé</span>
-            <span class="pill pill-accent">Génération rapports PDF</span>
-            <span class="pill pill-accent">Biopython</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <h4>Langues</h4>
-          <div class="lang-bars">
-            <div class="lang-item">
-              <div class="lang-info"><span>Arabe</span><span class="lang-level">Natif</span></div>
-              <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
-            </div>
-            <div class="lang-item">
-              <div class="lang-info"><span>Français</span><span class="lang-level">Avancé</span></div>
-              <div class="lang-bar"><div class="lang-fill" style="width:85%"></div></div>
-            </div>
-            <div class="lang-item">
-              <div class="lang-info"><span>Anglais</span><span class="lang-level">Intermédiaire</span></div>
-              <div class="lang-bar"><div class="lang-fill" style="width:55%"></div></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Contact</span>
-        <h2>Travaillons ensemble</h2>
-      </div>
-      <div class="contact-grid">
-        <div class="contact-info">
-          <p class="contact-intro">
-            Vous avez un projet d'analyse de données de santé, un tableau de bord à concevoir, ou vous cherchez un
-            partenaire pour piloter votre activité clinique ? Contactez-moi.
-          </p>
-          <div class="contact-items">
-            <a href="mailto:allammohamedamin34@gmail.com" class="contact-item">
-              <div class="contact-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-              </div>
-              <div>
-                <span class="contact-label">Email</span>
-                <span class="contact-value">allammohamedamin34@gmail.com</span>
-              </div>
-            </a>
-            <a href="tel:+212684456737" class="contact-item">
-              <div class="contact-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.98-.98a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              </div>
-              <div>
-                <span class="contact-label">Téléphone</span>
-                <span class="contact-value">+212 684-456737</span>
-              </div>
-            </a>
-            <div class="contact-item">
-              <div class="contact-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              </div>
-              <div>
-                <span class="contact-label">Localisation</span>
-                <span class="contact-value">Ouezzane, Maroc</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <form class="contact-form" onsubmit="handleSubmit(event)">
-          <div class="form-group">
-            <label for="name">Nom complet</label>
-            <input type="text" id="name" placeholder="Votre nom" required />
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="votre@email.com" required />
-          </div>
-          <div class="form-group">
-            <label for="subject">Sujet</label>
-            <input type="text" id="subject" placeholder="Analyse de données, Dashboard..." required />
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" rows="5" placeholder="Décrivez votre projet ou votre besoin..." required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-full">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Envoyer le message
-          </button>
-          <p class="form-note" id="form-note"></p>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <p>© 2025 ALLAM Mohamed Amin — Technicien en Statistiques Sanitaires</p>
-      <p class="footer-sub">Ouezzane, Maroc · allammohamedamin34@gmail.com</p>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script src="script.js"></script>
+document.getElementById('tweak-accent').addEventListener('input', e => {
+  const v = e.target.value;
+  document.documentElement.style.setProperty('--accent', v);
+  window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { accentColor: v } }, '*');
+});
+document.getElementById('tweak-theme').addEventListener('change', e => {
+  const v = e.target.value;
+  applyTweaks({ ...TWEAK_DEFAULTS, theme: v });
+  window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { theme: v } }, '*');
+});
+document.getElementById('tweak-fontsize').addEventListener('input', e => {
+  const v = parseInt(e.target.value);
+  document.body.style.fontSize = v + 'px';
+  window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { fontSize: v } }, '*');
+});
+</script>
 </body>
 </html>

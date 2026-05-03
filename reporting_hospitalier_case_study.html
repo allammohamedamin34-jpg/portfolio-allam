@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporting Hospitalier Mensuel Automatisé — Étude de cas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:opsz,wght@9..40,400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #FAF7F2;
+  --cream: #F2EBDD;
+  --rule: #E5DCC9;
+  --ink: #1A1F2E;
+  --ink-soft: #4A5160;
+  --teal: #0F4F4A;
+  --teal-deep: #0A3331;
+  --teal-glow: rgba(15, 79, 74, 0.08);
+  --rust: #B5451F;
+  --rust-soft: #D9794D;
+  --sage: #8B9D83;
+  --gold: #B8902A;
+  --display: 'Fraunces', 'Times New Roman', serif;
+  --body: 'DM Sans', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.55;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(26, 31, 46, 0.025) 1px, transparent 0);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ============ HEADER ============ */
+header.nav {
+  position: sticky;
+  top: 0;
+  background: rgba(250, 247, 242, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  z-index: 100;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+}
+.mark {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mark-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--rust);
+  border-radius: 50%;
+  display: inline-block;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--teal); }
+.cta-button {
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  padding: 10px 18px;
+  font-family: var(--body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 0;
+  text-decoration: none;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+.cta-button:hover { background: var(--teal); }
+@media (max-width: 800px) {
+  .nav-links { display: none; }
+}
+
+/* ============ HERO ============ */
+.hero {
+  padding: 80px 0 100px;
+  position: relative;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.tag-line {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tag-line::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--rust);
+  display: inline-block;
+}
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 350;
+  font-size: clamp(2.4rem, 5.5vw, 4.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 32px;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 350;
+  color: var(--teal);
+  font-variation-settings: "SOFT" 100;
+}
+.hero h1 .accent {
+  color: var(--rust);
+  font-style: italic;
+  font-weight: 400;
+}
+.hero-sub {
+  font-size: 1.08rem;
+  color: var(--ink-soft);
+  max-width: 520px;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+}
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.meta-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.meta-value {
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* PDF Mockup in Hero */
+.pdf-mockup-wrap {
+  position: relative;
+  perspective: 2000px;
+}
+.pdf-mockup {
+  background: white;
+  aspect-ratio: 0.77;
+  box-shadow: 
+    0 1px 2px rgba(26, 31, 46, 0.04),
+    0 8px 24px rgba(26, 31, 46, 0.08),
+    0 24px 60px rgba(26, 31, 46, 0.12);
+  transform: rotate(2.5deg);
+  padding: 32px 28px;
+  font-size: 0.7rem;
+  position: relative;
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: transform 0.4s ease;
+}
+.pdf-mockup:hover {
+  transform: rotate(0deg) translateY(-4px);
+}
+.pdf-mockup::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(15, 79, 74, 0.02) 50%, transparent 100%);
+  pointer-events: none;
+}
+.pdf-header {
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.pdf-hosp {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.pdf-hosp small {
+  display: block;
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 0.6rem;
+  color: var(--ink-soft);
+  margin-top: 3px;
+  letter-spacing: 0.05em;
+}
+.pdf-month {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  text-align: right;
+  color: var(--ink-soft);
+}
+.pdf-title {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--teal-deep);
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+.pdf-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.pdf-kpi {
+  border: 1px solid var(--rule);
+  padding: 8px 6px;
+  text-align: center;
+  background: var(--cream);
+}
+.pdf-kpi-val {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--teal-deep);
+  display: block;
+}
+.pdf-kpi-lab {
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+.pdf-section-title {
+  font-family: var(--display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+.pdf-table {
+  width: 100%;
+  font-size: 0.55rem;
+  border-collapse: collapse;
+  margin-bottom: 14px;
+}
+.pdf-table th {
+  text-align: left;
+  padding: 4px 6px;
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 500;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.pdf-table td {
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-soft);
+}
+.pdf-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 60px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 10px;
+}
+.pdf-bar {
+  flex: 1;
+  background: var(--teal);
+  position: relative;
+  min-height: 6px;
+}
+.pdf-bar:nth-child(1) { height: 40%; background: var(--sage); }
+.pdf-bar:nth-child(2) { height: 65%; background: var(--teal); }
+.pdf-bar:nth-child(3) { height: 50%; background: var(--sage); }
+.pdf-bar:nth-child(4) { height: 80%; background: var(--teal); }
+.pdf-bar:nth-child(5) { height: 95%; background: var(--rust); }
+.pdf-bar:nth-child(6) { height: 70%; background: var(--teal); }
+.pdf-footer {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  color: var(--ink-soft);
+  display: flex;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px solid var(--rule);
+}
+.pdf-stamp {
+  position: absolute;
+  bottom: -16px;
+  right: -16px;
+  background: var(--rust);
+  color: var(--paper);
+  padding: 8px 14px;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transform: rotate(-3deg);
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(181, 69, 31, 0.3);
+}
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 80px; }
+  .pdf-mockup-wrap { max-width: 360px; margin: 0 auto; }
+}
+
+/* ============ SECTION GENERIC ============ */
+section {
+  padding: 100px 0;
+  position: relative;
+}
+.section-tag {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-tag::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--ink-soft);
+}
+.section-h2 {
+  font-family: var(--display);
+  font-weight: 350;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  color: var(--ink);
+}
+.section-h2 em {
+  font-style: italic;
+  color: var(--teal);
+  font-weight: 400;
+}
+.section-lead {
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  max-width: 680px;
+  line-height: 1.65;
+}
+
+/* ============ DEFI ============ */
+.defi {
+  background: var(--cream);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.defi-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 80px;
+  margin-top: 60px;
+  align-items: start;
+}
+.defi-prose p {
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+.defi-prose p:first-child::first-letter {
+  font-family: var(--display);
+  font-size: 4.2rem;
+  font-weight: 500;
+  float: left;
+  line-height: 0.85;
+  margin: 8px 12px 0 0;
+  color: var(--rust);
+  font-style: italic;
+}
+.stats-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 2px solid var(--ink);
+}
+.stat-row {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.stat-num {
+  font-family: var(--display);
+  font-weight: 350;
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--teal-deep);
+  display: block;
+  margin-bottom: 8px;
+}
+.stat-num em {
+  font-style: italic;
+  color: var(--rust);
+}
+.stat-desc {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+@media (max-width: 800px) {
+  .defi-grid { grid-template-columns: 1fr; gap: 50px; }
+}
+
+/* ============ SOLUTION / PIPELINE ============ */
+.pipeline {
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+.stage {
+  padding: 32px 24px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  position: relative;
+  transition: all 0.3s ease;
+}
+.stage:not(:last-child) {
+  border-right: none;
+}
+.stage:hover {
+  background: var(--cream);
+  z-index: 2;
+}
+.stage-num {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--rust);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+.stage-title {
+  font-family: var(--display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.stage-desc {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.stage-snippet {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 12px 14px;
+  line-height: 1.5;
+  white-space: pre;
+  overflow-x: auto;
+}
+.stage-snippet .com { color: var(--sage); font-style: italic; }
+.stage-snippet .kw { color: var(--rust-soft); }
+.stage-snippet .str { color: var(--gold); }
+.arrow-flow {
+  position: absolute;
+  top: 50%;
+  height: 1px;
+  background: var(--ink);
+  z-index: 1;
+}
+@media (max-width: 1000px) {
+  .pipeline { grid-template-columns: repeat(2, 1fr); }
+  .stage { border: 1px solid var(--rule); }
+  .stage:not(:last-child) { border-right: 1px solid var(--rule); }
+  .stage:nth-child(odd) { border-right: none; }
+  .stage:nth-child(-n+2) { border-bottom: none; }
+}
+@media (max-width: 600px) {
+  .pipeline { grid-template-columns: 1fr; }
+  .stage { border: 1px solid var(--rule) !important; }
+  .stage:not(:last-child) { border-bottom: none !important; }
+}
+
+/* ============ STACK ============ */
+.stack-section {
+  background: var(--ink);
+  color: var(--paper);
+}
+.stack-section .section-tag {
+  color: var(--rust-soft);
+}
+.stack-section .section-tag::before {
+  background: var(--rust-soft);
+}
+.stack-section .section-h2 {
+  color: var(--paper);
+}
+.stack-section .section-h2 em {
+  color: var(--gold);
+}
+.stack-section .section-lead {
+  color: rgba(250, 247, 242, 0.7);
+}
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0;
+  margin-top: 60px;
+  border-top: 1px solid rgba(250, 247, 242, 0.1);
+  border-left: 1px solid rgba(250, 247, 242, 0.1);
+}
+.tech {
+  padding: 36px 24px;
+  border-right: 1px solid rgba(250, 247, 242, 0.1);
+  border-bottom: 1px solid rgba(250, 247, 242, 0.1);
+  transition: background 0.3s;
+  cursor: default;
+}
+.tech:hover {
+  background: rgba(184, 144, 42, 0.08);
+}
+.tech-icon {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--gold);
+  margin-bottom: 12px;
+  letter-spacing: 0.1em;
+}
+.tech-name {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: var(--paper);
+}
+.tech-role {
+  font-size: 0.82rem;
+  color: rgba(250, 247, 242, 0.55);
+  line-height: 1.4;
+}
+
+/* ============ RESULTATS ============ */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  margin-top: 64px;
+}
+.result-card {
+  border-top: 2px solid var(--ink);
+  padding-top: 28px;
+}
+.result-num {
+  font-family: var(--display);
+  font-weight: 350;
+  font-size: clamp(2.6rem, 4.2vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--teal-deep);
+  margin-bottom: 14px;
+}
+.result-num .small {
+  font-size: 0.5em;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.result-num em {
+  color: var(--rust);
+  font-style: italic;
+}
+.result-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.result-desc {
+  font-size: 0.92rem;
+  color: var(--ink);
+  line-height: 1.5;
+}
+@media (max-width: 900px) {
+  .results-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+}
+@media (max-width: 500px) {
+  .results-grid { grid-template-columns: 1fr; }
+}
+
+/* ============ ABOUT / CTA ============ */
+.about {
+  background: var(--cream);
+  border-top: 1px solid var(--rule);
+  padding: 120px 0;
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 60px;
+  align-items: center;
+  max-width: 920px;
+}
+.about-portrait {
+  width: 140px;
+  height: 140px;
+  background: var(--teal-deep);
+  color: var(--paper);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-size: 3rem;
+  font-weight: 400;
+  font-style: italic;
+  position: relative;
+}
+.about-portrait::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border: 1px solid var(--rust);
+  border-radius: 50%;
+  transform: rotate(-8deg);
+}
+.about-name {
+  font-family: var(--display);
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.about-role {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 18px;
+}
+.about-bio {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  margin-bottom: 28px;
+  max-width: 540px;
+}
+.cta-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 14px 28px;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: all 0.25s;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn-primary:hover {
+  background: var(--teal);
+  transform: translateY(-2px);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  padding: 14px 28px;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  border: 1px solid var(--ink);
+  transition: all 0.25s;
+}
+.btn-secondary:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+@media (max-width: 700px) {
+  .about-grid { grid-template-columns: 1fr; gap: 32px; text-align: left; }
+  .about-portrait { margin: 0; }
+}
+
+/* ============ FOOTER ============ */
+footer {
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  padding: 32px 0;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-note {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--sage);
+}
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero h1, .hero-sub, .hero-meta, .pdf-mockup-wrap, .tag-line {
+  animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+.tag-line { animation-delay: 0.05s; }
+.hero h1 { animation-delay: 0.15s; }
+.hero-sub { animation-delay: 0.3s; }
+.hero-meta { animation-delay: 0.45s; }
+.pdf-mockup-wrap { animation-delay: 0.6s; }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER NAV ============ -->
+<header class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <div class="mark">
+        <span class="mark-dot"></span>
+        Allam — Stats Sanitaires
+      </div>
+      <ul class="nav-links">
+        <li><a href="#defi">Le défi</a></li>
+        <li><a href="#solution">La solution</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#resultats">Résultats</a></li>
+      </ul>
+      <a href="#contact" class="cta-button">Travaillons ensemble</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="tag-line">Étude de cas · 2026 · Ouezzane</div>
+        <h1>De la donnée brute<br>au <em>rapport mensuel</em>,<br>en <span class="accent">quelques secondes.</span></h1>
+        <p class="hero-sub">Comment j'ai automatisé la production des rapports d'activité hospitaliers en alignant le pipeline sur les standards SIGS du Ministère de la Santé. Plus de saisie manuelle, plus d'erreurs de transcription — juste des données qui deviennent décisions.</p>
+        <div class="hero-meta">
+          <div class="meta-item">
+            <span class="meta-label">Domaine</span>
+            <span class="meta-value">Santé publique</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Stack</span>
+            <span class="meta-value">Python · pandas · LaTeX</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Statut</span>
+            <span class="meta-value">Livré</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Cadre</span>
+            <span class="meta-value">SIGS / RIH</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PDF MOCKUP -->
+      <div class="pdf-mockup-wrap">
+        <div class="pdf-mockup">
+          <div class="pdf-header">
+            <div class="pdf-hosp">
+              Hôpital Provincial de Ouezzane
+              <small>MINISTÈRE DE LA SANTÉ — DRS</small>
+            </div>
+            <div class="pdf-month">RAPPORT N° 04/2026<br>15 / 04 / 2026</div>
+          </div>
+          <div class="pdf-title">Rapport d'activité<br>mensuelle — Avril 2026</div>
+          <div class="pdf-kpis">
+            <div class="pdf-kpi">
+              <span class="pdf-kpi-val">5,2</span>
+              <span class="pdf-kpi-lab">DMS (j)</span>
+            </div>
+            <div class="pdf-kpi">
+              <span class="pdf-kpi-val">78%</span>
+              <span class="pdf-kpi-lab">TOM</span>
+            </div>
+            <div class="pdf-kpi">
+              <span class="pdf-kpi-val">4,1</span>
+              <span class="pdf-kpi-lab">TROT</span>
+            </div>
+          </div>
+          <div class="pdf-section-title">Activité par service</div>
+          <table class="pdf-table">
+            <thead>
+              <tr><th>Service</th><th>Adm.</th><th>Sortie</th><th>JH</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Médecine</td><td>142</td><td>138</td><td>724</td></tr>
+              <tr><td>Chirurgie</td><td>98</td><td>101</td><td>489</td></tr>
+              <tr><td>Maternité</td><td>187</td><td>185</td><td>561</td></tr>
+              <tr><td>Pédiatrie</td><td>76</td><td>74</td><td>312</td></tr>
+            </tbody>
+          </table>
+          <div class="pdf-section-title">Évolution N vs N-1</div>
+          <div class="pdf-chart">
+            <div class="pdf-bar"></div>
+            <div class="pdf-bar"></div>
+            <div class="pdf-bar"></div>
+            <div class="pdf-bar"></div>
+            <div class="pdf-bar"></div>
+            <div class="pdf-bar"></div>
+          </div>
+          <div class="pdf-footer">
+            <span>Généré automatiquement</span>
+            <span>p. 1 / 12</span>
+          </div>
+        </div>
+        <div class="pdf-stamp">Auto-généré</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LE DEFI ============ -->
+<section class="defi" id="defi">
+  <div class="container">
+    <div class="section-tag">01 — Contexte</div>
+    <h2 class="section-h2">Le <em>défi</em>.</h2>
+    <p class="section-lead">Chaque mois, le service de statistiques d'un établissement hospitalier compile, calcule et met en forme des dizaines d'indicateurs pour la direction. Manuellement.</p>
+
+    <div class="defi-grid">
+      <div class="defi-prose">
+        <p>La production du rapport mensuel d'activité est une étape critique du pilotage hospitalier — c'est ce document qui informe la direction sur l'occupation des lits, la durée moyenne de séjour, les flux par service, et l'évolution mois sur mois. Il alimente aussi les remontées vers la délégation provinciale et la DRS.</p>
+        <p>Le problème : ce rapport était produit à la main. Extraction des données depuis le SIH, calcul des indicateurs sur Excel, mise en forme manuelle, copier-coller dans un document Word. Plusieurs heures par mois consacrées à un travail à faible valeur ajoutée — et un risque permanent d'erreurs de transcription.</p>
+        <p>La direction a besoin d'un rapport rapide, fiable, et reproductible. Pas d'un travail de copiste.</p>
+      </div>
+      <div class="stats-stack">
+        <div class="stat-row">
+          <span class="stat-num">~4<em>h</em></span>
+          <span class="stat-desc">de saisie manuelle par cycle de reporting mensuel</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-num">12+</span>
+          <span class="stat-desc">indicateurs SIGS à recalculer à chaque édition</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-num">⚠</span>
+          <span class="stat-desc">risque permanent d'erreurs de transcription et d'incohérences entre versions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LA SOLUTION ============ -->
+<section id="solution">
+  <div class="container">
+    <div class="section-tag">02 — Approche</div>
+    <h2 class="section-h2">La <em>solution</em>.</h2>
+    <p class="section-lead">Un pipeline Python qui transforme les exports bruts du SIH en rapport LaTeX direction-ready. Quatre étapes, zéro intervention manuelle entre l'export et le PDF final.</p>
+
+    <div class="pipeline">
+      <div class="stage">
+        <div class="stage-num">01 / Ingestion</div>
+        <div class="stage-title">Données brutes</div>
+        <div class="stage-desc">Exports CSV/Excel issus du SIH et des registres de service.</div>
+        <div class="stage-snippet"><span class="com"># raw exports</span>
+df = pd.read_csv(
+  <span class="str">"sih_avril.csv"</span>,
+  sep=<span class="str">";"</span>
+)</div>
+      </div>
+      <div class="stage">
+        <div class="stage-num">02 / Traitement</div>
+        <div class="stage-title">Pipeline pandas</div>
+        <div class="stage-desc">Nettoyage, calcul des indicateurs SIGS, comparaison N vs N-1.</div>
+        <div class="stage-snippet"><span class="com"># compute KPIs</span>
+dms = jh / sorties
+tom = (jh / lits_dispo
+  / jours_mois) * <span class="kw">100</span></div>
+      </div>
+      <div class="stage">
+        <div class="stage-num">03 / Mise en forme</div>
+        <div class="stage-title">Template LaTeX</div>
+        <div class="stage-desc">Document paramétrable avec variables, tableaux, graphiques pgfplots.</div>
+        <div class="stage-snippet"><span class="com">% template</span>
+\section{Activité}
+\input{tables/
+  service_<span class="kw">{{ mois }}</span>.tex}</div>
+      </div>
+      <div class="stage">
+        <div class="stage-num">04 / Livrable</div>
+        <div class="stage-title">Rapport PDF</div>
+        <div class="stage-desc">Document final paginé, signé, prêt pour la direction et la DRS.</div>
+        <div class="stage-snippet"><span class="com"># compile</span>
+subprocess.run([
+  <span class="str">"pdflatex"</span>,
+  <span class="str">"rapport.tex"</span>
+])</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STACK TECHNIQUE ============ -->
+<section class="stack-section" id="stack">
+  <div class="container">
+    <div class="section-tag">03 — Stack technique</div>
+    <h2 class="section-h2">Outils <em>choisis</em>.</h2>
+    <p class="section-lead">Une stack volontairement simple, libre, et pérenne. Aucune dépendance propriétaire, aucun serveur à maintenir — un script qui tourne sur n'importe quel poste de l'établissement.</p>
+
+    <div class="stack-grid">
+      <div class="tech">
+        <div class="tech-icon">/01</div>
+        <div class="tech-name">Python</div>
+        <div class="tech-role">Langage du pipeline. Orchestration de bout en bout.</div>
+      </div>
+      <div class="tech">
+        <div class="tech-icon">/02</div>
+        <div class="tech-name">pandas</div>
+        <div class="tech-role">Manipulation des DataFrames, jointures, agrégations par service.</div>
+      </div>
+      <div class="tech">
+        <div class="tech-icon">/03</div>
+        <div class="tech-name">NumPy</div>
+        <div class="tech-role">Calculs vectorisés sur les indicateurs SIGS.</div>
+      </div>
+      <div class="tech">
+        <div class="tech-icon">/04</div>
+        <div class="tech-name">Jinja2</div>
+        <div class="tech-role">Injection des données dans le template LaTeX paramétré.</div>
+      </div>
+      <div class="tech">
+        <div class="tech-icon">/05</div>
+        <div class="tech-name">LaTeX</div>
+        <div class="tech-role">Mise en forme typographique, tableaux, graphiques pgfplots.</div>
+      </div>
+      <div class="tech">
+        <div class="tech-icon">/06</div>
+        <div class="tech-name">openpyxl</div>
+        <div class="tech-role">Lecture des canevas Excel utilisés par les services cliniques.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESULTATS ============ -->
+<section id="resultats">
+  <div class="container">
+    <div class="section-tag">04 — Impact</div>
+    <h2 class="section-h2"><em>Résultats</em>.</h2>
+    <p class="section-lead">Le pipeline est en production depuis avril 2026. Les rapports mensuels se génèrent désormais en commande unique, à partir de l'export brut.</p>
+
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-num">~4h <span class="small">→</span> <em>12s</em></div>
+        <div class="result-label">Temps de production</div>
+        <div class="result-desc">Le rapport complet se génère en moins d'une demi-minute après l'export.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">0</div>
+        <div class="result-label">Saisies manuelles</div>
+        <div class="result-desc">Aucun copier-coller entre Excel, Word, et le rapport final.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">100<span class="small">%</span></div>
+        <div class="result-label">Reproductibilité</div>
+        <div class="result-desc">Mêmes données → même rapport, à la décimale près, mois après mois.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">✓</div>
+        <div class="result-label">Conformité SIGS</div>
+        <div class="result-desc">Indicateurs alignés sur les standards du Ministère de la Santé.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT / CTA ============ -->
+<section class="about" id="contact">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-portrait">A</div>
+      <div>
+        <div class="about-name">Allam</div>
+        <div class="about-role">Technicien en statistiques sanitaires · Ouezzane</div>
+        <p class="about-bio">Je conçois des outils sur mesure pour les établissements de santé qui veulent transformer leurs données en décisions, sans friction technique. Reporting automatisé, indicateurs SIGS, tableaux de bord cliniques — du SIH brut au rapport prêt à diffuser.</p>
+        <div class="cta-row">
+          <a href="mailto:allammohamedamin34@gmail.com" class="btn-primary">→ Me contacter</a>
+          <a href="index.html" class="btn-secondary">Retour au portfolio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>© 2026 Allam · Tous droits réservés</div>
+      <div class="footer-note">Mockup d'étude de cas — données illustratives</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
